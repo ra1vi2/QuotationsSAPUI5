@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+        id="idDivisionVH"
+		title="Division"
+		ok=".onDivisionVHOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		supportMultiselect="false"
+		key="Spart"
+		descriptionKey="Vtext"
+	>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,52 @@
+<mvc:View
+    controllerName="com.quote.quotations.controller.QuoteMain"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+>
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content >
+                    	<FlexBox id="idFlexBox" height="100px" alignItems="Center" justifyContent="Center">
+                    	<RadioButtonGroup id="idHeaderRadioGroup" select="onSelectHeaderRadioButton" columns="2">
+						<RadioButton id="idRadioButtonCreate" text="Create"></RadioButton>
+						<RadioButton id="idRadioButtonEdit" text="Edit/Display"></RadioButton>
+					</RadioButtonGroup>
+                    </FlexBox>
+					<f:SimpleForm id="idQutationsMainForm" layout="ResponsiveLayout" columnsL="2" columnsM="2"
+						singleContainerFullSize="false" editable="true">
+						<f:content>
+							<core:Title id="idTitleCreate" text="Create"/>
+							<Label id="idLabelQuoteType" text="Quotation Type"></Label>
+							<ComboBox id="idQuoteType" items="{/ZOTC_SRCH_HELP_QUOTE_TYPE_DDL}" enabled="{this>/IsCreateQuoteSelected}" >
+                            <core:Item id="idQuoteTypeItem" key="{auart}" text="{bezei}" />
+                            </ComboBox>
+							<Label id="idLabelSalesorg" text="Sales Org"/>
+							<Input id="idSalesOrg" enabled="{this>/IsCreateQuoteSelected}" showValueHelp="true" valueHelpRequest="onSalesOrgVH" required="true" >
+                            	
+                            </Input>
+							<Label id="idLabelDC" text="Distribution Channel"></Label>
+							<Input id="idDistrbutionChannel" enabled="{this>/IsCreateQuoteSelected}" showValueHelp="true" valueHelpRequest="onDCVH" required="true"></Input>
+							<Label id="idLabelDivision" text="Division"/>
+							<Input id="idDivision" enabled="{this>/IsCreateQuoteSelected}" showValueHelp="true" valueHelpRequest="onDivisionVH" required="true"></Input>
+							
+                            <core:Title  id="idTitleEdit" text="Edit/Display"/>
+							<Label id="idLabelQuoteNumber" text="Quote Number"></Label>
+							<Input id="idQuoteNumber" enabled="{=! ${this>/IsCreateQuoteSelected}}" showValueHelp="true" valueHelpRequest="onQNVH" required="true"></Input>
+						</f:content>
+					</f:SimpleForm>
+                    	<FlexBox id="idFlexBoxGoButton" height="100px" alignItems="Center" justifyContent="Center">
+					<Button id="idQuoteSubmitButton" text="GO" press="onGOQuoteMain"></Button>
+                    </FlexBox>
+
+
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

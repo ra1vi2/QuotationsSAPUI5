@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+        id="idDCVH"
+		title="Distribution Channel"
+		ok=".onDCVHOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		supportMultiselect="false"
+		key="Vtweg"
+		descriptionKey="Vtext"
+	>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

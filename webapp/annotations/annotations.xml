@@ -1,0 +1,30 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/opu/odata/sap/ZOTC_FIORI_QUOTE_SRV/$metadata">
+		<edmx:Include Alias="Metadata" Namespace="ZOTC_FIORI_QUOTE_SRV"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="com.quote.quotations.annotations.annotations.ZOTC_FIORI_QUOTE_SRV">
+			<Annotations Target="Metadata.ZOTC_SRCH_HELP_SALES_ORG_DDLType">
+				<Annotation Term="Common.ValueList" >
+					<Record>
+                    <PropertyValue Property="Label" String="vkorg"/>
+                    <PropertyValue Property="CollectionPath" String="ZOTC_SRCH_HELP_SALES_ORG_DDLType"/>
+                    <PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="vkorg"/></Record>
+								<Record Type="com.sap.vocabularies.Common.v1.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="vtext"/></Record>
+								</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
