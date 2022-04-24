@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:m="sap.m">
+	<ValueHelpDialog
+        id="idInco1VH"
+		title="Inco Terms"
+		ok=".onInco1VHOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		supportMultiselect="false"
+		key="Inco1"
+        descriptionKey="Bezei"
+	>
+    		</ValueHelpDialog>
+</core:FragmentDefinition>

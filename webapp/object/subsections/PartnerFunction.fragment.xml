@@ -1,0 +1,164 @@
+<core:FragmentDefinition xmlns:m="sap.m" xmlns="sap.ui.table"  xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+
+<Table rows="{QuotedetailModel>/QUOTEPARTNERS/results}" selectionMode="Single" visibleRowCount="4">
+	<extension>
+					<m:OverflowToolbar style="Clear">
+						<m:Title text="Partner Functions" level="H2" />
+                        <m:ToolbarSpacer />
+                   <!-- <m:Button text="Add" press="onAddPartnerFunction"/>
+                     <m:Button text="Edit" press="onEditPartnerFunction" /> 
+                    <m:Button text="Delete" press="onDeletePartnerFunction" /> -->
+                    	</m:OverflowToolbar>
+				</extension>
+
+                <columns>
+					<Column >
+						<m:Label text="Part. Func." tooltip="Partner Function"/>
+						<template>
+							 <!-- <m:ComboBox editable="{this>/EditPartnerTable}"/> -->
+                             <m:Text text="{QuotedetailModel>Parvw}" />
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="Partner" tooltip="Partner"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>PartnerExt}" visible="{=! ${this>/EditPartnerTable}}" />
+                            <m:Input value="{QuotedetailModel>PartnerExt}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+                        </template>
+					</Column>
+                    <Column >
+						<m:Label text="Business Partner" tooltip="Business Partner"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>BuPartner}" visible="{=! ${this>/EditPartnerTable}}" />
+                            <m:Input value="{QuotedetailModel>BuPartner}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="Name" tooltip="Name"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>Name1}" visible="{=! ${this>/EditPartnerTable}}" />
+                            <m:Input value="{QuotedetailModel>Name1}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="Street" tooltip="Street"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>Street}" visible="{=! ${this>/EditPartnerTable}}" />
+                             <m:Input value="{QuotedetailModel>Street}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="Postal Code" tooltip="Postal Code"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>PostCode1}" visible="{=! ${this>/EditPartnerTable}}" />
+                                <m:Input value="{QuotedetailModel>PostCode1}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="City" tooltip="City"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>City1}" visible="{=! ${this>/EditPartnerTable}}" />
+                                <m:Input value="{QuotedetailModel>City1}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="Region" tooltip="Region"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>Region}" visible="{=! ${this>/EditPartnerTable}}" />
+                                <m:Input value="{QuotedetailModel>Region}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="Country" tooltip="Country"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>Country}" visible="{=! ${this>/EditPartnerTable}}" />
+                                <m:Input value="{QuotedetailModel>Country}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="Partner Definition" tooltip="Partner Definition"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>PartnerExt}" visible="{=! ${this>/EditPartnerTable}}" />
+                                <m:Input value="{QuotedetailModel>PartnerExt}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    </columns>
+			
+</Table>
+
+
+<!--	<Table id="idPartnerFunctionTable" mode="SingleSelectLeft" items="{QuotedetailModel>/QUOTEPARTNERS/results}">
+    	<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="Partner Functions" level="H2"/>
+                    <ToolbarSpacer ></ToolbarSpacer>
+                    <Button text="Add" press="onAddPartnerFunction"/>
+                    <Button text="Edit" press="onEditPartnerFunction" />
+                    <Button text="Delete" press="onDeletePartnerFunction" />
+                    	</content>
+			</OverflowToolbar>
+		</headerToolbar>
+        <columns>
+        <Column>
+        <Text text="Part. Func." />
+        </Column>
+        <Column>
+        <Text text="Partner" />
+        </Column>
+        <Column>
+        <Text text="Business Partner" />
+        </Column>
+         <Column>
+        <Text text="Name" />
+        </Column>
+         <Column>
+        <Text text="Street" />
+        </Column>
+         <Column>
+        <Text text="Postal Code" />
+        </Column>
+         <Column>
+        <Text text="City" />
+        </Column>
+         <Column>
+        <Text text="Partner Definition" />
+        </Column>
+
+        </columns>
+        <items>
+			<ColumnListItem vAlign="Middle">
+        <cells>
+        <ComboBox ></ComboBox>
+        <Input value="{QuotedetailModel>PartnerExt}"></Input>
+        <Text text="{QuotedetailModel>BuPartner}"></Text>
+        <Text text="{QuotedetailModel>Name1}"></Text>
+        <Text text="{QuotedetailModel>Street}"></Text>
+        <Text text="{QuotedetailModel>PostCode1}"></Text>
+         <Text text="{QuotedetailModel>City1}"></Text>
+         <Text text="{QuotedetailModel>PartnerExt}"></Text>
+       	</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+    -->
+
+</core:FragmentDefinition>

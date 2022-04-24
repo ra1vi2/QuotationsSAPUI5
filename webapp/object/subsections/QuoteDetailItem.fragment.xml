@@ -1,0 +1,100 @@
+<core:FragmentDefinition xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.ui.table">
+    <Table id="table1" rows="{QuotedetailModel>/QUOTEITEMS/results}" selectionMode="Single" visibleRowCount="7" ariaLabelledBy="title" class="sapUiMediumMarginTop">
+        <extension>
+            <m:OverflowToolbar>
+                <m:Title id="title" text="Order Item" level="H2"/>
+                <m:ToolbarSpacer/>
+                <m:Button text="Add" press="onAddLineItem"/>
+                <m:Button text="Delete" press="onDeleteLineItem" />
+            </m:OverflowToolbar>
+        </extension>
+        <columns>
+            <Column width="6rem">
+                <m:Label text="Item" tooltip="Item"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>Posnr}" wrapping="false"/>
+                </template>
+            </Column>
+            <Column width="6rem">
+                <m:Label text="Material" tooltip="Material"/>
+                <template>
+                    <m:Input value="{QuotedetailModel>Matnr}" showValueHelp="true" valueHelpRequest="onMaterialVH"></m:Input>
+                </template>
+            </Column>
+            <Column width="12rem" hAlign="End">
+                <m:Label text="Material Description" tooltip="Material Description"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>Arktx}" wrapping="false"/>
+                </template>
+            </Column>
+            <Column width="9rem">
+                <m:Label text="Critical Sales Notes" tooltip="Critical Sales Notes"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>SalesNote}" wrapping="false"/>
+                </template>
+            </Column>
+            <Column width="6rem">
+                <m:Label text="Quantity" tooltip="Quantity"/>
+                <template>
+                    <m:Input value="{QuotedetailModel>Kwmeng}" submit="onSubmitItemQuantity"/>
+                </template>
+            </Column>
+            <Column width="3rem">
+                <m:Label text="UoM" tooltip="UoM"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>Vrkme}" wrapping="false"/>
+                </template>
+            </Column>
+            <Column width="6rem">
+                <m:Label text="Avail." tooltip="Available Qty"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>Avail}" wrapping="false"/>
+                </template>
+            </Column>
+            <Column width="6rem">
+                <m:Label text="List Price" tooltip="List Price"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>ListPrice}" />
+                </template>
+            </Column>
+            <Column width="6rem">
+                <m:Label text="Calc Price" tooltip="Calculated Price"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>Kzwi2}" wrapping="false" />
+                </template>
+            </Column>
+            <Column width="6rem">
+                <m:Label text="Disc." tooltip="Discount"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>Discount}" wrapping="false"/>
+                </template>
+            </Column>
+            <Column width="6rem">
+                <m:Label text="Override Sell Price" tooltip="Override Sell Price" />
+                <template>
+                    <m:Input value="{QuotedetailModel>OverrideSellprice}" />
+                </template>
+            </Column>
+            <Column width="6rem">
+                <m:Label text="Net Value" tooltip="Net Value"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>Netvalue}" wrapping="false"/>
+                </template>
+            </Column>
+            <Column width="9rem">
+                <m:Label text="Plant" tooltip="Plant"/>
+                <template>
+                    <m:Input value="{QuotedetailModel>ItemWerks}" showValueHelp="true" valueHelpRequest="onPlantVH"/>
+                </template>
+            </Column>
+            <Column width="9rem">
+                <m:Label text="Material Source" tooltip="Material Source"/>
+                <template>
+                    <m:Input value="{QuotedetailModel>ItemZzmatSrc}" showValueHelp="true" valueHelpRequest="onMaterialSourceVH"/>
+                </template>
+            </Column>
+        </columns>
+    </Table>
+</core:FragmentDefinition>

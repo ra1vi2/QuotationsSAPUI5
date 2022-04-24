@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:m="sap.m">
+	<ValueHelpDialog
+        id="idMaterialSourceVH"
+		title="Material Source"
+		ok=".onMaterialSourceVHOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		supportMultiselect="false"
+		key="Key"
+        descriptionKey="Value"
+	>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

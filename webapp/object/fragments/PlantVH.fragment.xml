@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:m="sap.m">
+	<ValueHelpDialog
+        id="idPlantVH"
+		title="Plant"
+		ok=".onPlantVHOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		supportMultiselect="false"
+		key="Werks"
+        descriptionKey="Name1"
+	>
+    		</ValueHelpDialog>
+</core:FragmentDefinition>

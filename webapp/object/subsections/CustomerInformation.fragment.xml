@@ -1,0 +1,70 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+
+<form:Form id="idCustomerInfoForm"  width="40rem" editable="true" binding="{QuotedetailModel>/QUOTEHEADER}" >	
+          <form:layout>
+				<form:ResponsiveGridLayout
+					labelSpanXL="4"
+					labelSpanL="4"
+					labelSpanM="12"
+					labelSpanS="12"
+					emptySpanXL="0"
+					emptySpanL="0"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="2"
+					columnsM="2"
+				 />
+                    	</form:layout>
+		<form:title>
+			<core:Title id="idCustomerInfoFormTitle" text="Customer Information"/>
+		</form:title>
+		<form:formContainers>
+			<form:FormContainer id="idCustomerInfoFormContainer">
+				<form:FormElement  label="Sales Office">
+					<form:fields>
+	                   <Input value="{QuotedetailModel>Vkbur}" description="{QuotedetailModel>VkburBezei}" tooltip="{QuotedetailModel>VkburBezei}" enabled="false"/>
+					</form:fields>
+				</form:FormElement>
+                <form:FormElement  label="Sales Group">
+					<form:fields>
+	                   <Input  value="{QuotedetailModel>Vkgrp}" description="{QuotedetailModel>VkgrpBezei}" tooltip="{QuotedetailModel>VkgrpBezei}" enabled="false"/>
+					</form:fields>
+				</form:FormElement>
+                <form:FormElement  label="Sales District">
+					<form:fields>
+	                   <Input  value="{QuotedetailModel>Bzirk}" description="{QuotedetailModel>Bztxt}" tooltip="{QuotedetailModel>Bztxt}" enabled="false"/>
+					</form:fields>
+				</form:FormElement>
+                <!-- <form:FormElement  label="Price List Type">
+					<form:fields>
+	                   <Input  value="{QuotedetailModel>Pltyp}" description="{QuotedetailModel>Ptext}" tooltip="{QuotedetailModel>Ptext}" enabled="false"/>
+					</form:fields>
+				</form:FormElement> -->
+                 </form:FormContainer>
+                 <form:FormContainer>
+                 <form:FormElement  label="Price List Type">
+					<form:fields>
+	                   <Input  value="{QuotedetailModel>Pltyp}" description="{QuotedetailModel>Ptext}" tooltip="{QuotedetailModel>Ptext}" enabled="false"/>
+					</form:fields>
+				</form:FormElement>
+                  <form:FormElement  label="Terms">
+					<form:fields>
+	                   <Input  value="{QuotedetailModel>Zterm}" description="{QuotedetailModel>Vtext}" tooltip="{QuotedetailModel>Vtext}" enabled="false"/>
+					</form:fields>
+				</form:FormElement>
+                <form:FormElement  label="Tax Status">
+					<form:fields>
+	                   <Input  value="{QuotedetailModel>Taxkd}"  enabled="false"/>
+					</form:fields>
+				</form:FormElement>
+                <!-- <form:FormElement  label="Exemption #">
+					<form:fields>
+	                   <Input  value="{QuotedetailModel>/exmption}" enabled="false"/>
+					</form:fields>
+				</form:FormElement> -->
+                 </form:FormContainer>
+		</form:formContainers>
+	</form:Form>
+
+</core:FragmentDefinition>

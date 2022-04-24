@@ -95,7 +95,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "com.quote.quotations.view",
+        "viewPath": "com.quote.quotations",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
@@ -103,19 +103,31 @@
       "routes": [
         {
           "name": "RouteQuoteMain",
-          "pattern": "RouteQuoteMain",
+          "pattern": "",
           "target": [
             "TargetQuoteMain"
           ]
-        }
+        },
+        {
+            "name": "detail",
+            "pattern": "detail",
+            "target": [
+              "TargetQuoteDetail"
+            ]
+          }
       ],
       "targets": {
         "TargetQuoteMain": {
           "viewType": "XML",
           "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "QuoteMain",
-          "viewName": "QuoteMain"
+          "viewId": "view.QuoteMain",
+          "viewName": "view.QuoteMain"
+        },
+        "TargetQuoteDetail": {
+            "viewType": "XML",
+            "transition": "slide",
+            "viewId": "object.QuoteDetail",
+            "viewName": "object.QuoteDetail"
         }
       }
     },

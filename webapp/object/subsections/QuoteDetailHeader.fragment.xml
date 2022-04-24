@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form">
+
+    <VBox>
+        <HBox>
+            <Label labelFor="idQuoteDetailHeaderFormQuoteNumber" text="Quote Number" class="sapUiTinyMarginTop sapUiMediumMarginBegin sapUiMediumMarginEnd" />
+            <Input id="idQuoteDetailHeaderFormQuoteNumber" value="{QuotedetailModel>/QUOTEHEADER/Vbeln}" enabled="false"/>
+
+            <Label class="sapUiTinyMarginTop sapUiLargeMarginBegin sapUiMediumMarginEnd" labelFor="idFormQuoteHeaderDetailNetValue" text="Net Value" />
+            <Input id="idFormQuoteHeaderDetailNetValue" value="{QuotedetailModel>/QUOTEHEADER/Netwr}" enabled="false"/>
+
+            <!--   <Input id="idHeaderFormOrder" value="{QuotedetailModel>/QUOTEHEADER/Customer}" fieldGroupIds="idCustomerProfileValidationGroupNames" /> -->
+        </HBox>
+
+        <HBox>
+            <Label class="sapUiTinyMarginTop sapUiMediumMarginBegin sapUiLargeMarginEnd" labelFor="idQuoteDetailHeaderFormSoldTo" text="Sold To" />
+            <Input id="idQuoteDetailHeaderFormSoldTo" class="sapUiMediumMarginBegin" width="75%" showValueHelp="true" submit="onChangeSoldTo" change="onChangeSoldTo" valueHelpRequest="onSoldToVH" value="{QuotedetailModel>/QUOTEHEADER/Kunag}" />
+            <Text id="idSoldToAddress" wrapping="true" text="{Quotedetailsheader>/QUOTEHEADER/SoldtoDesc}" wrappingType="Normal"/>
+
+        </HBox>
+        <HBox>
+            <Label class="sapUiTinyMarginTop sapUiMediumMarginBegin sapUiLargeMarginEnd" labelFor="idHeaderFormCustomer" text="Ship To" />
+            <Input id="idQuoteDetailHeaderFormShipTo" class="sapUiMediumMarginBegin" width="75%" showValueHelp="true" valueHelpRequest="onShipToVH" value="{QuotedetailModel>/QUOTEHEADER/Kunwe}" submit="onChangeShipTo" />
+            <Text id="idShipToAddress" text="{Quotedetailsheader>/QUOTEHEADER/ShiptoDesc}" wrapping="true" wrappingType="Normal" />
+        </HBox>
+        <HBox>
+            <Label class="sapUiTinyMarginTop sapUiMediumMarginBegin sapUiMediumMarginEnd" labelFor="idHeaderFormCutReference" text="Cust Reference" />
+            <Input id="idHeaderFormCutReference" value="{QuotedetailModel>/QUOTEHEADER/Bstkd}" change="onChangeCustomerName" />
+
+            <Label class="sapUiTinyMarginTop sapUiLargeMarginBegin sapUiMediumMarginEnd" labelFor="idQuoteHeaderCustRefDate" text="Cust Reference Date" />
+            <DatePicker id="idQuoteHeaderCustRefDate" required="true" value="{path : 'QuotedetailModel>/QUOTEHEADER/Bstdk' , type : 'sap.ui.model.type.Date'}" change="onSetDate"></DatePicker>
+        </HBox>
+
+        <HBox>
+            <Label class="sapUiTinyMarginTop sapUiMediumMarginBegin sapUiMediumMarginEnd" labelFor="idQuoteHeaderValidaFrom" text="Valid From" />
+            <DatePicker id="idQuoteHeaderValidFrom" class="sapUiMediumMarginBegin" width="75%" value="{path : 'QuotedetailModel>/QUOTEHEADER/Angdt' , type : 'sap.ui.model.type.Date'}" change="onSetDate"></DatePicker>
+
+            <Label labelFor="idQuoteHeaderValidTo" text="Valid To" class="sapUiTinyMarginTop sapUiLargeMarginBegin sapUiMediumMarginEnd" />
+            <DatePicker id="idQuoteHeaderValidTo" required="true" class="sapUiLargeMarginBegin" width="80%" value="{path : 'QuotedetailModel>/QUOTEHEADER/Bnddt' , type : 'sap.ui.model.type.Date'}" change="onSetDate"></DatePicker>
+
+        </HBox>
+        <HBox>
+            <Label text="CX Comments : " labelFor="idCXArea" class="sapUiTinyMarginTop sapUiMediumMarginBegin sapUiMediumMarginEnd"/>
+            <TextArea id="idCXArea" value="{QuotedetailModel>/QUOTEHEADER/CxComments}" width="45rem"/>
+        </HBox>
+    </VBox>
+
+
+</core:FragmentDefinition>

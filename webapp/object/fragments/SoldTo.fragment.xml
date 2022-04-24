@@ -4,159 +4,149 @@
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:m="sap.m">
 	<ValueHelpDialog
-        id="idQuotationIDVH"
-		title="Quotation Number"
-		ok=".onQuotationIDVHOkPress"
+        id="idSoldToIDVH"
+		title="Sold To"
+		ok=".onSoldToVHOkPress"
 		cancel=".onValueHelpCancelPress"
 		afterClose=".onValueHelpAfterClose"
 		supportMultiselect="false"
-		key="Vbeln"
+		key="Kunnr"
 	>
     	<filterBar>
-			<fb:FilterBar advancedMode="true" search=".onSearchQuoteID"  >
+			<fb:FilterBar id="_IDGenFilterBar1" advancedMode="true" search=".onSearchSoldTo"  >
 				<fb:filterGroupItems>
-					<fb:FilterGroupItem
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem1"
 						groupName="__$INTERNAL$"
 						name="Bstkd"
-						label="PO Number"
+						label="Search Term"
 						visibleInFilterBar="true"
 					>
 						<fb:control>
-							<m:Input name="Bstkd" value="{QuoteIDFilterModel>/Bstkd}" />
+							<m:Input id="_IDGenInput1" name="Sortl" value="{SoldToFilter>/Sortl}" />
 						</fb:control>
 					</fb:FilterGroupItem>
 
-					<fb:FilterGroupItem
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem2"
 						groupName="__$INTERNAL$"
 						name="Vkorg"
 						label="Sales Org"
 						visibleInFilterBar="true"
 					>
 						<fb:control>
-							<m:Input name="Vkorg" value="{QuoteIDFilterModel>/Vkorg}"/>
+							<m:Input id="_IDGenInput2" name="Vkorg" value="{SoldToFilter>/Vkorg}"/>
 						</fb:control>
 					</fb:FilterGroupItem>
 
-					<fb:FilterGroupItem
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem3"
 						groupName="__$INTERNAL$"
 						name="Kunnr"
-						label="Sold-to-party"
+						label="Country"
 						visibleInFilterBar="true"
 					>
 						<fb:control>
-							<m:Input name="Kunnr" value="{QuoteIDFilterModel>/Kunnr}"/>
+							<m:Input id="_IDGenInput3" name="Land1" value="{SoldToFilter>/Land1}"/>
 						</fb:control>
 					</fb:FilterGroupItem>
 
-					<fb:FilterGroupItem
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem4"
 							groupName="__$INTERNAL$"
 							name="Vtweg"
 							label="Distribution Channel"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Vtweg" value="{QuoteIDFilterModel>/Vtweg}"/>
+							<m:Input id="_IDGenInput4" name="Vtweg" value="{SoldToFilter>/Vtweg}"/>
 						</fb:control>
 					</fb:FilterGroupItem>
 
-					<fb:FilterGroupItem
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem5"
 							groupName="__$INTERNAL$"
 							name="Spart"
 							label="Division"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Spart" value="{QuoteIDFilterModel>/Spart}"/>
+							<m:Input id="_IDGenInput5" name="Spart" value="{SoldToFilter>/Spart}"/>
 						</fb:control>
 					</fb:FilterGroupItem>
 
-                    <fb:FilterGroupItem
+                    <fb:FilterGroupItem id="_IDGenFilterGroupItem6"
 							groupName="__$INTERNAL$"
 							name="Vkbur"
 							label="Sales office"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Vkbur" value="{QuoteIDFilterModel>/Vkbur}" />
+							<m:Input id="_IDGenInput6" name="Vkbur" value="{SoldToFilter>/Vkbur}" />
 						</fb:control>
 					</fb:FilterGroupItem>
 
-                    <fb:FilterGroupItem
+                    <fb:FilterGroupItem id="_IDGenFilterGroupItem7"
 							groupName="__$INTERNAL$"
 							name="Vkgrp"
 							label="Sales group"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Vkgrp" value="{QuoteIDFilterModel>/Vkgrp}"/>
+							<m:Input id="_IDGenInput7" name="Vkgrp" value="{SoldToFilter>/Vkgrp}"/>
 						</fb:control>
 					</fb:FilterGroupItem>
 
-                        <fb:FilterGroupItem
+                        <fb:FilterGroupItem id="_IDGenFilterGroupItem8"
 							groupName="__$INTERNAL$"
-							name="Ernam"
-							label="Created by"
+							name="Pstlz"
+							label="Postal Code"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Ernam" value="{QuoteIDFilterModel>/Ernam}" />
+							<m:Input id="_IDGenInput8" name="Pstlz" value="{SoldToFilter>/Pstlz}" />
 						</fb:control>
 					</fb:FilterGroupItem>
 
-                       <fb:FilterGroupItem
+                       <fb:FilterGroupItem id="_IDGenFilterGroupItem9"
 							groupName="__$INTERNAL$"
 							name="Auart"
 							label="Sales Doc. Type"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Auart" value="{QuoteIDFilterModel>/Auart}" />
+							<m:Input id="_IDGenInput9" name="Auart" value="{SoldToFilter>/Auart}" />
 						</fb:control>
 					</fb:FilterGroupItem>
 
-                    <fb:FilterGroupItem
+                    <fb:FilterGroupItem id="_IDGenFilterGroupItem10"
 							groupName="__$INTERNAL$"
-							name="Bstdk"
-							label="Cust. Ref. Date"
+							name="Mcod3"
+							label="City"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Bstdk" value="{QuoteIDFilterModel>/Bstdk}" />
+							<m:Input id="_IDGenInput10" name="Mcod3" value="{SoldToFilter>/Mcod3}" />
 						</fb:control>
 					</fb:FilterGroupItem>
 
-                     <fb:FilterGroupItem
+                     <fb:FilterGroupItem id="_IDGenFilterGroupItem11"
 							groupName="__$INTERNAL$"
 							name="Trvog"
-							label="Transact.Group"
+							label="Name"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Trvog" value="{QuoteIDFilterModel>/Trvog}"/>
+							<m:Input id="_IDGenInput11" name="Mcod1" value="{SoldToFilter>/Mcod1}"/>
 						</fb:control>
 					</fb:FilterGroupItem>
 
-                     <fb:FilterGroupItem
+                     <fb:FilterGroupItem id="_IDGenFilterGroupItem12"
 							groupName="__$INTERNAL$"
 							name="Vbeln"
-							label="Sales document"
+							label="Customer"
 							visibleInFilterBar="true"
 						>
 						<fb:control>
-							<m:Input name="Vbeln" value="{QuoteIDFilterModel>/Vbeln}" />
+							<m:Input id="_IDGenInput12" name="Kunnr" value="{SoldToFilter>/Kunnr}" />
 						</fb:control>
 					</fb:FilterGroupItem>
 
-                    <fb:FilterGroupItem
-							groupName="__$INTERNAL$"
-							name="Posnr"
-							label="Item"
-							visibleInFilterBar="true"
-						>
-						<fb:control>
-							<m:Input name="Posnr" value="{QuoteIDFilterModel>/Posnr}"/>
-						</fb:control>
-					</fb:FilterGroupItem>
 				</fb:filterGroupItems>
 			</fb:FilterBar>
 		</filterBar>

@@ -1,0 +1,90 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:m="sap.m">
+	<ValueHelpDialog
+        id="idMaterialIDVH"
+		title="Material"
+		ok=".onMaterialVHOkPress"
+		cancel=".onValueHelpCancelPress"
+		afterClose=".onValueHelpAfterClose"
+		supportMultiselect="false"
+		key="Matnr"
+	>
+    	<filterBar>
+			<fb:FilterBar id="_IDGenFilterBar1" advancedMode="true"  >
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem1"
+						groupName="__$INTERNAL$"
+						name="Prodh"
+						label="Prod.hierarchy "
+						visibleInFilterBar="true"
+					>
+						<fb:control>
+							<m:Input id="_IDGenInput1" name="Prodh" value="{MaterialFilter>/Prodh}" />
+						</fb:control>
+					</fb:FilterGroupItem>
+
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem2"
+						groupName="__$INTERNAL$"
+						name="Vkorg"
+						label="Sales Org"
+						visibleInFilterBar="true"
+					>
+						<fb:control>
+							<m:Input id="_IDGenInput2" name="Vkorg" value="{MaterialFilter>/Vkorg}"/>
+						</fb:control>
+					</fb:FilterGroupItem>
+
+				
+
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem4"
+							groupName="__$INTERNAL$"
+							name="Vtweg"
+							label="Distribution Channel"
+							visibleInFilterBar="true"
+						>
+						<fb:control>
+							<m:Input id="_IDGenInput4" name="Vtweg" value="{MaterialFilter>/Vtweg}"/>
+						</fb:control>
+					</fb:FilterGroupItem>
+
+					<fb:FilterGroupItem id="_IDGenFilterGroupItem5"
+							groupName="__$INTERNAL$"
+							name="Matnr"
+							label="Material"
+							visibleInFilterBar="true"
+						>
+						<fb:control>
+							<m:Input id="_IDGenInput5" name="Matnr" value="{MaterialFilter>/Matnr}"/>
+						</fb:control>
+					</fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem id="_IDGenFilterGroupItem6"
+							groupName="__$INTERNAL$"
+							name="Spras"
+							label="Language"
+							visibleInFilterBar="true"
+						>
+						<fb:control>
+							<m:Input id="_IDGenInput6" name="Spras" value="{MaterialFilter>/Spras}" />
+						</fb:control>
+					</fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem id="_IDGenFilterGroupItem7"
+							groupName="__$INTERNAL$"
+							name="Maktg"
+							label="Description"
+							visibleInFilterBar="true"
+						>
+						<fb:control>
+							<m:Input id="_IDGenInput7" name="Maktg" value="{MaterialFilter>/Maktg}"/>
+						</fb:control>
+					</fb:FilterGroupItem>
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

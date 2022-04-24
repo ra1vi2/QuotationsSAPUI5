@@ -1,0 +1,90 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+		id="idShipToSelectDialog"
+		noDataText="No Ship To Found"
+		title="Select Ship To"
+		confirm=".handleShipToSelectDialogClose"
+		cancel=".handleShipToSelectDialogClose"
+		items="{
+			path : 'shipToAddressFromSoldTo>/results'
+		}">
+		<ColumnListItem vAlign="Middle">
+			<cells>
+				<Text text="{shipToAddressFromSoldTo>Kunnr}" />
+				<Text text="{shipToAddressFromSoldTo>Name}" />
+				<Text text="{shipToAddressFromSoldTo>Name2}" />
+                <Text text="{shipToAddressFromSoldTo>Name3}" />
+                <Text text="{shipToAddressFromSoldTo>Name4}" />
+                <Text text="{shipToAddressFromSoldTo>Street}" />
+                <Text text="{shipToAddressFromSoldTo>City}" />
+                <Text text="{shipToAddressFromSoldTo>CityCode}" />
+                <Text text="{shipToAddressFromSoldTo>Region}" />
+                <Text text="{shipToAddressFromSoldTo>PostalCode}" />
+                <Text text="{shipToAddressFromSoldTo>Country}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="12em">
+				<header>
+					<Text text="Ship To Party" />
+				</header>
+			</Column>
+			<Column  demandPopin="true">
+				<header>
+					<Text text="Name" />
+				</header>
+			</Column>
+			<Column
+				hAlign="End">
+				<header>
+					<Text text="Name2" />
+				</header>
+			</Column>
+            <Column
+				hAlign="End">
+				<header>
+					<Text text="Name3" />
+				</header>
+			</Column>
+            <Column
+				hAlign="End">
+				<header>
+					<Text text="Name4" />
+				</header>
+			</Column>
+			<Column
+				hAlign="Center">
+				<header>
+					<Text text="Street" />
+				</header>
+			</Column>
+			<Column hAlign="End">
+				<header>
+					<Text text="City" />
+				</header>
+			</Column>
+            	<Column hAlign="End">
+				<header>
+					<Text text="City Code" />
+				</header>
+			</Column>
+            	<Column hAlign="End">
+				<header>
+					<Text text="Region" />
+				</header>
+			</Column>
+            	<Column hAlign="End">
+				<header>
+					<Text text="Postal Code" />
+				</header>
+			</Column>
+            	<Column hAlign="End">
+				<header>
+					<Text text="Country" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>
