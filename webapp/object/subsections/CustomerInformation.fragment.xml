@@ -31,7 +31,7 @@
 	                   <Input  value="{QuotedetailModel>Vkgrp}" description="{QuotedetailModel>VkgrpBezei}" tooltip="{QuotedetailModel>VkgrpBezei}" enabled="false"/>
 					</form:fields>
 				</form:FormElement>
-                <form:FormElement  label="Sales District">
+                <form:FormElement  label="Sales Dist.">
 					<form:fields>
 	                   <Input  value="{QuotedetailModel>Bzirk}" description="{QuotedetailModel>Bztxt}" tooltip="{QuotedetailModel>Bztxt}" enabled="false"/>
 					</form:fields>

@@ -7,6 +7,11 @@ sap.ui.define(
     "./QuoteDetailBO",
     "sap/ui/core/Fragment",
     "sap/ui/core/syncStyleClass",
+    "sap/ui/core/BusyIndicator",
+    "sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/Text",
+    "sap/ui/core/routing/History",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -18,7 +23,12 @@ sap.ui.define(
     FilterOperator,
     BO,
     Fragment,
-    syncStyleClass
+    syncStyleClass,
+    BusyIndicator,
+    Dialog,
+    Button,
+    Text,
+    History
   ) {
     "use strict";
 
@@ -59,7 +69,9 @@ sap.ui.define(
         if (sPreviousHash !== undefined) {
           history.go(-1);
         } else {
-          this.getRouter().navTo("RouteQuoteMain", {}, true);
+          this.getOwnerComponent()
+            .getRouter()
+            .navTo("RouteQuoteMain", {}, true);
         }
       },
 
@@ -144,6 +156,7 @@ sap.ui.define(
         this._filterVHTable("ShipToFilter", "/DebisSet");
       },
       onChangeSoldTo: function () {
+        this._setAppBusy(true);
         var soldTo = this.byId("idQuoteDetailHeaderFormSoldTo").getValue();
 
         var oMainScreenModel = this.getOwnerComponent().getModel(
@@ -174,6 +187,7 @@ sap.ui.define(
                 new JSONModel(oResponse.SHIPTOADDRESSNAV),
                 "shipToAddressFromSoldTo"
               );
+            that._setAppBusy(false);
             //that.getView().setModel(new JSONModel(oResponse.MASTERFIELDSNAV), "masterdatamodel");
             that.openShipToPopUp();
             //that.setMasterDataFields();
@@ -182,10 +196,27 @@ sap.ui.define(
             sap.m.MessageBox.error(
               JSON.parse(oError.responseText).error.message.value
             );
+            var aData = that.getView().getModel("QuotedetailModel").getData();
+            if (aData.QUOTEHEADER) {
+              aData.QUOTEHEADER = {};
+            }
+            var headerdata = that.getView()
+              .getModel("Quotedetailsheader")
+              .getData();
+            if (headerdata) {
+              headerdata = {};
+            }
+            that.getView().getModel("Quotedetailsheader").setData(headerdata);
+            if (aData.QUOTEPARTNERS) {
+              aData.QUOTEPARTNERS.results = [];
+            }
+            that.getView().getModel("QuotedetailModel").setData(aData);
+            that._setAppBusy(false);
           });
       },
       openShipToPopUp: function () {
         var oView = this.getView();
+
         if (!this._pDialog) {
           this._pDialog = Fragment.load({
             id: oView.getId(),
@@ -242,15 +273,19 @@ sap.ui.define(
         var Spart = oMainScreenModel.getData().Division;
         var auart = oMainScreenModel.getData().QuoteType;
         var that = this;
-        BO.getShipToAddress(this.getView().getModel(), {
-          vbeln: "",
-          kunag: soldTo,
-          kunwe: shipTo,
-          auart: auart,
-          vkorg: Vkorg,
-          vtweg: Vtweg,
-          spart: Spart,
-        })
+        BO.getShipToAddress(
+          this.getView().getModel("QuotedetailModel"),
+          this.getView(),
+          {
+            vbeln: "",
+            kunag: soldTo,
+            kunwe: shipTo,
+            auart: auart,
+            vkorg: Vkorg,
+            vtweg: Vtweg,
+            spart: Spart,
+          }
+        )
           .then(function (oResponse) {
             /* that.getView().byId("idShipToAddress")
                          .setText(
@@ -258,11 +293,20 @@ sap.ui.define(
                              oResponse.SOLDTOADDRESSNAV.Street +
                              oResponse.SOLDTOADDRESSNAV.City);
                  }); */
-            if (oResponse.QUOTEITEMS.results.length === 0) {
+            /* if (oResponse.QUOTEITEMS.results.length === 0) {
               oResponse.QUOTEITEMS.results.push({
                 Posnr: "10",
                 ItemZzmatSrc: oResponse.QUOTEHEADER.HeaderZzmatSrc,
               });
+            } */
+
+            var oGoModel = that
+              .getOwnerComponent()
+              .getModel("onGoResponseModel");
+            if (oGoModel) {
+              var oGoModelData = oGoModel.getData();
+              oResponse.QUOTEHEADER.Angdt = oGoModelData.ValidFrom;
+              oResponse.QUOTEHEADER.Bnddt = oGoModelData.ValidTo;
             }
             that.getView().getModel("QuotedetailModel").setData(oResponse);
           })
@@ -354,6 +398,7 @@ sap.ui.define(
       onMaterialSourceVHOkPress: function (oEvent) {
         var aTokens = oEvent.getParameter("tokens");
         BO.onValueHelpOkPress(aTokens, this.currentMatSourceLine, this);
+        this.currentMaterialSourceValue = this.currentMatSourceLine.getValue();
       },
       onMaterialVH: function (oEvent) {
         var globalThis = this;
@@ -467,20 +512,172 @@ sap.ui.define(
           .getBindingContext("QuotedetailModel");
         var sPath = oContext.getPath();
         var oSelectedObject = oContext.getObject(sPath);
-        BO.readItemTableLine(oView, oSelectedObject).then(
-          function () {
-            this.handleLineItemUpdate.apply(this, arguments);
-          }.bind(this)
-        );
+        if (!oSelectedObject.Matnr) {
+          oEvent
+            .getSource()
+            .getParent()
+            .getAggregation("cells")[1]
+            .setValueState("Error");
+        } else if (!oSelectedObject.Kwmeng) {
+          oEvent
+            .getSource()
+            .getParent()
+            .getAggregation("cells")[4]
+            .setValueState("Error");
+        } else {
+          this._setAppBusy(true);
+          BO.readItemTableLine(this.getView(), oSelectedObject)
+            .then(
+              function (oResponse) {
+                var oModel = this.getView().getModel("QuotedetailModel");
+                BO.updateItemTableLine(oResponse, oModel, sPath);
+                BO.updateItemTableModelValueFields(oModel);
+                this.updateNetValue(oModel);
+                this._setAppBusy(false);
+              }.bind(this)
+            )
+            .fail(
+              function (oError) {
+                sap.m.MessageBox.error(
+                  JSON.parse(oError.responseText).error.message.value
+                );
+                this._setAppBusy(false);
+              }.bind(this)
+            );
+        }
       },
       onSubmitQuote: function () {
+        this._setAppBusy(true);
+        var that = this;
         BO.submitQuote(this.getView())
-          .then(function () {
-            alert("success");
+          .then(function (oResponse) {
+            // alert("Quotation : "+oResponse.vbeln+" created successfully ");
+
+            var dialog = new Dialog({
+              title: "Quotation Creation",
+              type: "Message",
+              state: "Success",
+              content: new Text({
+                text:
+                  "Quotation : " + oResponse.vbeln + " created successfully ",
+              }),
+              beginButton: new Button({
+                text: "Ok",
+                press: function () {
+                  dialog.close();
+                },
+              }),
+              afterClose: function () {
+                dialog.destroy();
+              },
+            });
+            dialog.open();
+            //alert("success");
+            that._setAppBusy(false);
           })
-          .fail(function () {
-            alert("Error");
+          .fail(function (oError) {
+            var dialog = new Dialog({
+              title: "Quotation Creation",
+              type: "Message",
+              state: "Error",
+              content: new Text({
+                text: JSON.parse(oError.responseText).error.message.value,
+              }),
+              beginButton: new Button({
+                text: "Ok",
+                press: function () {
+                  dialog.close();
+                },
+              }),
+              afterClose: function () {
+                dialog.destroy();
+              },
+            });
+            dialog.open();
+            that._setAppBusy(false);
           });
+      },
+
+      onAddLineItem: function () {
+        var oDetailModel = this.getView().getModel("QuotedetailModel");
+        var oDetailData = oDetailModel.getData();
+        var availableIndex = oDetailData.QUOTEITEMS.results.length;
+        var posnr = (availableIndex + 1) * 10;
+        var oData = {
+          Posnr: posnr.toString(),
+          ItemZzmatSrc: this.byId("idMaterialSource").getSelectedKey(),
+        };
+        BO.createItemData(oData, oDetailModel);
+      },
+      onDeleteLineItem: function (oEvent) {
+        var oDetailModel = this.getView().getModel("QuotedetailModel");
+        var oDetailData = oDetailModel.getData();
+
+        var index = oEvent
+          .getSource()
+          .getParent()
+          .getParent()
+          .getSelectedIndex();
+        oDetailData.QUOTEITEMS.results.splice(index, 1);
+        oDetailData.QUOTEHEADER.Netwr = BO.getTotalNetValue(
+          oDetailModel
+        ).toString();
+        oDetailModel.setData(oDetailData);
+      },
+      onEnterOverridePrice: function (oEvent) {
+        var oContext = oEvent
+          .getSource()
+          .getParent()
+          .getBindingContext("QuotedetailModel");
+        var sPath = oContext.getPath();
+        var oSelectedObject = oContext.getObject(sPath);
+        if (!oSelectedObject.Matnr) {
+          oEvent
+            .getSource()
+            .getParent()
+            .getAggregation("cells")[1]
+            .setValueState("Error");
+        } else if (!oSelectedObject.Kwmeng) {
+          oEvent
+            .getSource()
+            .getParent()
+            .getAggregation("cells")[4]
+            .setValueState("Error");
+        } else {
+          var oModel = this.getView().getModel("QuotedetailModel");
+          BO.updateItemTableModelValueFields(oModel);
+          this.updateNetValue(oModel);
+        }
+      },
+      updateNetValue: function (oModel) {
+        var oDetailData = oModel.getData();
+        oDetailData.QUOTEHEADER.Netwr = BO.getTotalNetValue(oModel).toString();
+        oModel.setData(oDetailData);
+      },
+      handleLineItemUpdate: function (oResponse, sPath) {},
+      onGenerateFreightEstimate: function () {
+        this._setAppBusy(true);
+        BO.generateFreight(this.getView())
+          .then(
+            function () {
+              this._setAppBusy(false);
+            }.bind(this)
+          )
+          .fail(
+            function (oError) {
+              sap.m.MessageBox.error(
+                JSON.parse(oError.responseText).error.message.value
+              );
+              this._setAppBusy(false);
+            }.bind(this)
+          );
+      },
+      _setAppBusy: function (flag) {
+        if (flag) {
+          BusyIndicator.show();
+        } else {
+          BusyIndicator.hide();
+        }
       },
     });
   }

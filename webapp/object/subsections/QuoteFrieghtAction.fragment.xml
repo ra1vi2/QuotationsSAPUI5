@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form">
+
+    <VBox>
+        <HBox>
+            <Label labelFor="idQuoteLink" text="Quotation Link" class="sapUiMediumMarginBegin" />
+            <TextArea id="idQuoteLink" value="" editable="false" class="sapUiSmallMarginBegin"/>
+
+            <Label labelFor="idSalesNotes" text="Sales Notes" class="sapUiMediumMarginBegin" />
+            <TextArea id="idSalesNotes" value="" editable="false" class="sapUiMediumMarginBegin" />
+
+        </HBox>
+        <f:SimpleForm id="SimpleFormChange355" editable="true" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" class="sapUiLargeMarginBegin">
+            <f:content>
+                <core:Title  />
+                <Label text="Net Value" />
+                <Input value="{SupplierName}" />
+                <Label text="Est. Shipping" />
+                <Input value="" />
+                <Label text="Est. Tax" />
+                <Input value="" />
+                <Label text="Total" />
+                <Input value="" />
+
+                <core:Title  />
+                <Label text="Total Profit" />
+                <Input value="" />
+                <Label text="Margin Profit" />
+                <Input value="" />
+            </f:content>
+        </f:SimpleForm>
+
+        <f:SimpleForm id="SimpleFormChange356" editable="true" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" class="sapUiLargeMarginBegin">
+            <f:content>
+                <core:Title  />
+                <Label text="" />
+                <Button text="Email Quote" />
+
+                <Label text="" />
+                <Button text="Generate e-Quote Link" />
+
+
+                <core:Title  />
+                <Label text="" />
+                <Button text="Create Order(Background)" />
+                <Label text="" />
+                <Button text="Create Order(Foreground)" />
+            </f:content>
+        </f:SimpleForm>
+
+    </VBox>
+</core:FragmentDefinition>

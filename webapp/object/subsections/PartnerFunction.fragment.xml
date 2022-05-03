@@ -13,7 +13,7 @@
 
                 <columns>
 					<Column >
-						<m:Label text="Part. Func." tooltip="Partner Function"/>
+						<m:Label text="Part.Func." tooltip="Partner Function"/>
 						<template>
 							 <!-- <m:ComboBox editable="{this>/EditPartnerTable}"/> -->
                              <m:Text text="{QuotedetailModel>Parvw}" />
@@ -29,7 +29,7 @@
                         </template>
 					</Column>
                     <Column >
-						<m:Label text="Business Partner" tooltip="Business Partner"/>
+						<m:Label text="BP" tooltip="Business Partner"/>
 						<template>
                             <m:VBox>
 							<m:Text text="{QuotedetailModel>BuPartner}" visible="{=! ${this>/EditPartnerTable}}" />
@@ -47,11 +47,29 @@
 						</template>
 					</Column>
                     <Column >
+						<m:Label text="Email" tooltip="Email"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="{QuotedetailModel>Email}" visible="{=! ${this>/EditPartnerTable}}" />
+                            <!-- <m:Input value=""  /> -->
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
 						<m:Label text="Street" tooltip="Street"/>
 						<template>
                             <m:VBox>
 							<m:Text text="{QuotedetailModel>Street}" visible="{=! ${this>/EditPartnerTable}}" />
                              <m:Input value="{QuotedetailModel>Street}" visible="{this>/EditPartnerTable}" />
+						    </m:VBox>
+						</template>
+					</Column>
+                    <Column >
+						<m:Label text="House Number" tooltip="House Number"/>
+						<template>
+                            <m:VBox>
+							<m:Text text="" />
+                                <!-- <m:Input value="{QuotedetailModel>PartnerExt}" visible="{this>/EditPartnerTable}" /> -->
 						    </m:VBox>
 						</template>
 					</Column>
@@ -91,7 +109,7 @@
 						    </m:VBox>
 						</template>
 					</Column>
-                    <Column >
+                    <!-- <Column >
 						<m:Label text="Partner Definition" tooltip="Partner Definition"/>
 						<template>
                             <m:VBox>
@@ -99,7 +117,7 @@
                                 <m:Input value="{QuotedetailModel>PartnerExt}" visible="{this>/EditPartnerTable}" />
 						    </m:VBox>
 						</template>
-					</Column>
+					</Column> -->
                     </columns>
 			
 </Table>

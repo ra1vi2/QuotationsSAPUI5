@@ -6,18 +6,19 @@
     <Shell id="shell">
         <App id="app">
             <pages>
-                <Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack" showHeader="false" floatingFooter="true" showFooter="true">
+                <Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack" showHeader="false" >
                     <content >
 
                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteDetailHeader" type="XML"/>
                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteDetailHeaderMid" type="XML"/>
                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteDetailItem" type="XML"/>
+                        <core:Fragment fragmentName="com.quote.quotations.object.subsections.Freight" type="XML"/>
+                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteFrieghtAction" type="XML"/>
                     </content>
-                    <footer>
+                   <!-- <footer>
                         <OverflowToolbar id="otbFooter">
-                            <!-- <Button id="idMessagePopOver" icon="sap-icon://alert" text="{=${message>/}.length}" visible="{=${message>/}.length > 0}" type="Emphasized" press="onMessagePopoverPress"></Button> -->
-                            <ToolbarSpacer/>
-                            <Button type="Accept" text="Submit" press="onSubmitQuote">
+                             <ToolbarSpacer/>
+                             <Button type="Accept" text="Create Quote" press="onSubmitQuote">
                                 <layoutData>
                                     <OverflowToolbarLayoutData priority="NeverOverflow"/>
                                 </layoutData>
@@ -26,9 +27,9 @@
                                 <layoutData>
                                     <OverflowToolbarLayoutData priority="NeverOverflow"/>
                                 </layoutData>
-                            </Button>
+                            </Button> 
                         </OverflowToolbar>
-                    </footer>
+                    </footer> -->
                 </Page>
             </pages>
         </App>

@@ -6,9 +6,17 @@ sap.ui.define(
     "sap/ui/core/Fragment",
     "sap/m/Token",
     "../utils/Utility",
-    "../utils/CreateColumns"
+    "../utils/CreateColumns",
   ],
-  function (JSONModel, Filter, FilterOperator, Fragment, Token, Utility,columns) {
+  function (
+    JSONModel,
+    Filter,
+    FilterOperator,
+    Fragment,
+    Token,
+    Utility,
+    columns
+  ) {
     "use strict";
     return {
       submitQuote: function (oView) {
@@ -133,7 +141,7 @@ sap.ui.define(
           },
         });
       },
-      getShipToAddress: function (oModel, aData) {
+      getShipToAddress: function (oModel, oView, aData) {
         var sPath =
           "/QuotationCreateSet(vbeln='" +
           aData.vbeln +
@@ -150,11 +158,21 @@ sap.ui.define(
           "',spart='" +
           aData.spart +
           "')";
-        return this.readData(oModel, sPath, {
+        return this.readData(oView.getModel(), sPath, {
           urlParameters: {
             $expand: "QUOTEHEADER,QUOTEITEMS,QUOTEPARTNERS",
           },
-        });
+        }); /* 
+        var aData = oModel.getData();
+        aData.action = "SHIPTO";
+        aData.QUOTEHEADER.Kunag = aData.kunag = mainScreenData.kunag;
+        aData.QUOTEHEADER.Kunwe = aData.kunwe = mainScreenData.kunwe;
+        aData.QUOTEHEADER.Auart = aData.auart = mainScreenData.auart;
+        aData.QUOTEHEADER.Vkorg = aData.vkorg = mainScreenData.vkorg;
+        aData.QUOTEHEADER.Vtweg = aData.vtweg = mainScreenData.vtweg;
+        aData.QUOTEHEADER.Spart = aData.spart = mainScreenData.spart;
+        aData.QUOTEHEADER.Vbeln = aData.vbeln = "";
+        return this.submitData(oView.getModel(), aData); */
       },
       readData: function (oModel, sPath, aParameters) {
         return Utility.odataRead(oModel, sPath, aParameters);
@@ -164,16 +182,92 @@ sap.ui.define(
         return aFilter;
       },
       preparePayload: function (oView) {
-        return oView.getModel("QuotedetailModel").getData();
+        var aData = oView.getModel("QuotedetailModel").getData();
+        aData.action = "SAVE";
+        return aData;
       },
-      readItemTableLine:function(oView, object){
-          var aData = oView.getModel("QuotedetailModel").getData();
-          aData.action = "VALIDATE";
-          aData.QUOTEITEMS = object;
-         return this.submitData(oView.getModel(), aData);
+      readItemTableLine: function (oView, object) {
+        var oModel = oView.getModel("QuotedetailModel");
+        var aData = oModel.getData();
+        var items = aData.QUOTEITEMS;
+        var header = aData.QUOTEHEADER;
+        return this.lineItemRead(oView, header, object);
+      },
+      lineItemRead: function (oView, header, object) {
+        var aPayload = {
+          action: "SIMULATE",
+          QUOTEHEADER: header,
+          QUOTEITEMS: {
+            results: [],
+          },
+        };
+        aPayload.QUOTEITEMS.results.push(object);
+        return this.submitData(oView.getModel(), aPayload);
+      },
+      generateFreight: function (oView) {
+        var aData = oView.getModel("QuotedetailModel").getData();
+        var aPayload = {
+          Identifier: aData.QUOTEHEADER.Username,
+          ShippingCond: aData.QUOTEHEADER.Vsbed,
+          ShipTo: aData.QUOTEHEADER.Kunwe,
+          ShipmentDate: aData.QUOTEHEADER.Ketdat,
+          CountryCode: aData.QUOTEHEADER.CountryCode,
+          NetValue: aData.QUOTEHEADER.Netwr,
+          InputItem: [],
+        };
+
+        aData.QUOTEITEMS.results.forEach(function (item) {
+          aPayload.InputItem.push({
+            Identifier: aData.QUOTEHEADER.Username,
+            LineItem: item.Posnr,
+            Material: item.Matnr,
+            MaterialDesc: item.Arktx,
+            Plant: item.ItemWerks,
+            Quantity: item.Kwmeng,
+          });
+        });
+        return this.submitFreight(
+          oView.getModel("freight"),
+          "/FreightHeaderSet",
+          aPayload
+        );
+      },
+      updateItemTableLine: function (oResponse, oModel, index) {
+        var aData = oModel.getData();
+        aData.QUOTEITEMS.results[index.slice(-1)] =
+          oResponse.QUOTEITEMS.results[0];
+        oModel.setData(aData);
+      },
+      updateItemTableModelValueFields: function (oModel) {
+        var aData = oModel.getData();
+        aData.QUOTEITEMS.results.forEach(function (item) {
+          if (item.OverrideSellprice > 0) {
+            item.Netvalue = (item.OverrideSellprice * item.Kwmeng).toString();
+          }
+        });
+        oModel.setData(aData);
+      },
+      createItemData: function (oData, oModel) {
+        var aData = oModel.getData();
+        aData.QUOTEITEMS.results.push({
+          Posnr: oData.Posnr,
+          ItemZzmatSrc: oData.ItemZzmatSrc,
+        });
+        oModel.setData(aData);
+      },
+      getTotalNetValue: function (oModel) {
+        var aData = oModel.getData();
+        var TotalNetValue = 0;
+        aData.QUOTEITEMS.results.forEach(function (item) {
+          TotalNetValue += parseFloat(item.Netvalue);
+        });
+        return TotalNetValue;
       },
       submitData: function (oModel, aData) {
         return Utility.odataCreate(oModel, "/QuotationCreateSet", aData);
+      },
+      submitFreight: function (oModel, sEntitySet, aData) {
+        return Utility.odataCreate(oModel, sEntitySet, aData);
       },
     };
   }

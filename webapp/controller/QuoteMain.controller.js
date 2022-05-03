@@ -5,11 +5,12 @@ sap.ui.define(
     "./QuoteMainBO",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
+    "sap/ui/core/BusyIndicator"
   ],
   /**
    * @param {typeof sap.ui.core.mvc.Controller} Controller
    */
-  function (Controller, JSONModel, BO, Filter, FilterOperator) {
+  function (Controller, JSONModel, BO, Filter, FilterOperator, BusyIndicator) {
     "use strict";
 
     return Controller.extend("com.quote.quotations.controller.QuoteMain", {
@@ -151,6 +152,7 @@ sap.ui.define(
       onGOQuoteMain: function () {
         var oData = [];
         var that = this;
+        this._setAppBusy(true);
         oData.QuoteType = this.byId("idQuoteType").getSelectedKey();
         oData.SalesOrg = this.byId("idSalesOrg").getSelectedKey();
         oData.DC = this.byId("idDistrbutionChannel").getSelectedKey();
@@ -169,6 +171,7 @@ sap.ui.define(
           })
             .then(function (oResponse) {
               that.getView().byId("idQuoteType").setSelectedItemId();
+              that._setAppBusy(false);
               that
                 .getOwnerComponent()
                 .setModel(new JSONModel(oResponse), "onGoResponseModel");
@@ -176,14 +179,23 @@ sap.ui.define(
             })
             .fail(function (oError) {
               sap.m.MessageBox.error(oError.value);
+              that._setAppBusy(false);
             });
         } else {
+            this._setAppBusy(false);
         }
       },
 
       _updateFilterArray(aFilter, sProperty, sValue) {
         aFilter.push(new Filter(sProperty, FilterOperator.EQ, sValue));
         return aFilter;
+      },
+       _setAppBusy:function(flag){
+          if(flag){
+              BusyIndicator.show();
+          }else{
+              BusyIndicator.hide();
+          }
       },
       onChange:function(oEvent){
           oEvent.getSource().setValueState("None");

@@ -19,16 +19,45 @@
 		</form:title>
 		<form:formContainers>
 			<form:FormContainer id="idQuickHeaderFormContainer">
-				<form:FormElement  label="Email">
+                <form:FormElement  label="Qt.Name">
 					<form:fields>
-	                   <Input value="{QuotedetailModel>email}" tooltip="{QuotedetailModel>email}" />
+	                   <Input value="{QuotedetailModel>QtName}" tooltip="{QuotedetailModel>QtName}" placeholder="Add Quote Name"/>
                        
 					</form:fields>
 				</form:FormElement>
-                <form:FormElement  label="Order Combo">
+				<form:FormElement  label="Qt.Email">
+					<form:fields>
+	                   <Input value="{QuotedetailModel>QtEmail}" tooltip="{QuotedetailModel>QtEmail}" placeholder="Add Quote Email"/>
+                       
+					</form:fields>
+				</form:FormElement>
+                <!-- <form:FormElement  label="Order Combo">
 					<form:fields>
 	                   <CheckBox selected="{QuotedetailModel>Kzazu}" />
                       
+					</form:fields>
+				</form:FormElement> -->
+                <!-- <form:FormElement  label="Incoterms 1">
+					<form:fields>
+	                   <Input value="{QuotedetailModel>Inco1}" showValueHelp="true" valueHelpRequest="onIncoTerms1VH" />
+                       
+                       
+					</form:fields>
+				</form:FormElement> -->
+                <!-- </form:FormContainer>
+                 <form:FormContainer> -->
+                   <form:FormElement  label="Mat.Source">
+					<form:fields>
+	                   <Input id="idMaterialSource" selectedKey="{QuotedetailModel>HeaderZzmatSrc}"  showValueHelp="true" valueHelpRequest="onMaterialSourceVH"/>
+                    
+					</form:fields>
+				</form:FormElement>
+                </form:FormContainer>
+                <form:FormContainer id="idQuickHeaderFormContainer2">
+                <form:FormElement  label="Plant">
+					<form:fields>
+	                   <Input id="idQuickHeaderPlant" value="{QuotedetailModel>HeaderWerks}"  showValueHelp="true" valueHelpRequest="onPlantVH" />
+                    
 					</form:fields>
 				</form:FormElement>
                 <form:FormElement  label="Incoterms 1">
@@ -38,27 +67,6 @@
                        
 					</form:fields>
 				</form:FormElement>
-                </form:FormContainer>
-                 <form:FormContainer>
-                   <form:FormElement  label="Material Source">
-					<form:fields>
-	                   <Input id="idMaterialSource" value="{QuotedetailModel>HeaderZzmatSrc}" showValueHelp="true" valueHelpRequest="onMaterialSourceVH"/>
-                    
-					</form:fields>
-				</form:FormElement>
-                <form:FormElement  label="Plant">
-					<form:fields>
-	                   <Input id="idQuickHeaderPlant" value="{QuotedetailModel>HeaderWerks}"  showValueHelp="true" valueHelpRequest="onPlantVH" />
-                    
-					</form:fields>
-				</form:FormElement>
-                <!-- <form:FormElement  label="Incoterms 1">
-					<form:fields>
-	                   <Input value="{QuotedetailModel>Inco1}" showValueHelp="true" valueHelpRequest="onIncoTerms1VH" />
-                       
-                       
-					</form:fields>
-				</form:FormElement> -->
                 <form:FormElement  label="Incoterms 2">
 					<form:fields>
 	                  

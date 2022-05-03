@@ -1,79 +1,74 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
-
-<HBox>
-    	<RadioButtonGroup id="idGenerateFreightEstimate" >
-			<RadioButton id="idGenerateFreightEstimateNone" text="None" />
-			<RadioButton id="idGenerateFreightEstimateGround" text="Ground" />
-            <RadioButton id="idGenerateFreightEstimate3Day" text="3rd Day Shipping" />
-			<RadioButton id="idGenerateFreightEstimate2Day" text="2nd Day" />
-            <RadioButton id="idGenerateFreightEstimateOvernight" text="Overnight" />
-			<RadioButton id="idGenerateFreightEstimateNextDay" text="Next Day Early AM" />
-		</RadioButtonGroup>
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form">
 
 
+    <HBox class="sapUiMediumMarginTop">
+        <VBox>
+            <Button text="Generate Frieght Estimates" press="onGenerateFreightEstimate" />
+            <RadioButtonGroup id="idGenerateFreightEstimate">
+                <RadioButton id="idGenerateFreightEstimateNone" text="None" />
+                <RadioButton id="idGenerateFreightEstimateGround" text="Ground" />
+                <RadioButton id="idGenerateFreightEstimate3Day" text="3rd Day Shipping" />
+                <RadioButton id="idGenerateFreightEstimate2Day" text="2nd Day" />
+                <RadioButton id="idGenerateFreightEstimateOvernight" text="Overnight" />
+                <RadioButton id="idGenerateFreightEstimateNextDay" text="Next Day Early AM" />
+            </RadioButtonGroup>
 
-	<VBox class="sapUiSmallMargin">
-		<f:SimpleForm id="SimpleFormChange354"
-			editable="true"
-			layout="ResponsiveGridLayout"
-			title="Address"
-			labelSpanXL="3"
-			labelSpanL="3"
-			labelSpanM="3"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="4"
-			emptySpanL="4"
-			emptySpanM="4"
-			emptySpanS="0"
-			columnsXL="1"
-			columnsL="1"
-			columnsM="1"
-			singleContainerFullSize="false" >
-			<f:content>
-				<Label text="Freight Estimate Flag" />
-				<Input id="name" value="{SupplierName}" />
-				<Label text="Shipping Charge" />
-				<Input value="{Street}" />
-				<Label text="Ship Complete" />
-				<Input value="{Street}" />
-                <Label text="Max Part del" />
-				<Input value="{Street}" />
-                <Label text="Shipping Instrctions" />
-				<Input value="{Street}" />
-                <Label text="Parcel Acc Number" />
-				<Input value="{Street}" />
+        </VBox>
 
-                <Label text="LTL Acc Number" />
-				<Input value="{Street}" />
-                <Label text="Preferred Carrier" />
-				<Input value="{Street}" />
-			</f:content>
-		</f:SimpleForm>
-	</VBox>
+        <VBox>
+            <f:SimpleForm id="SimpleFormChange354" editable="true" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2">
+                <f:content>
+                    <core:Title  />
+                    <Label text="Freight Estimate Flag" />
+                    <Input id="name" value="{SupplierName}" />
+                    <Label text="Shipping Charge" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/ShippingCharge}" />
+                    <Label text="Ship Complete" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/Autlf}" />
+                    <Label text="Max Part del" />
+                    <Input value="{Street}" />
+
+                    <core:Title  />
+                    <Label text="Shipping Instrctions" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/ShippingInstr}" />
+                    <Label text="Parcel Acc Number" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/ParcelAccno}" />
+
+                    <Label text="LTL Acc Number" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/LtlAccno}" />
+                    <Label text="Preferred Carrier" />
+                    <Input value="{Street}" />
+
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
 
 
-<VBox>
-    <HBox>
-        <Label text="Shipping Condition" />
-        <Input />
-        </HBox>
-         <HBox>
-        <Label text="Master Pack" />
-        <Input />
-        </HBox>
-         <HBox>
-        <Label text="Blind Brand" />
-        <Input />
-        </HBox>
-    </VBox>
-
-    <VBox class="sapUiLargeMarginTop">
-        <HBox>
-            <Label text="Total Weight" />
-            <Input />
-            <Input value="UOM"/>
+        <VBox class="sapUiLargeMarginTop">
+            <HBox>
+                <Label text="Shipping Condition: " labelFor="idFreightShipCondition" class="sapUiSmallMarginEnd"/>
+                <Input id="idFreightShipCondition" value="{QuotedetailModel>/QUOTEHEADER/Kvgr2}"/>
             </HBox>
+            <HBox>
+                <Label text="Master Pack: " labelFor="idFrieghtMasterPack" class="sapUiLargeMarginEnd"/>
+                <Input id="idFrieghtMasterPack"/>
+            </HBox>
+            <HBox>
+                <Label text="Blind Brand: " labelFor="idFreightBlindBrand" class="sapUiLargeMarginEnd"/>
+                <Input id="idFreightBlindBrand"/>
+            </HBox>
+
+
+            <VBox class="sapUiLargeMarginTop">
+                <HBox>
+                    <Label text="Total Weight : " class="sapUiSmallMarginEnd"/>
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/Btgew}"/>
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/Gewei}" width="50%"/>
+                </HBox>
+            </VBox>
         </VBox>
 
     </HBox>

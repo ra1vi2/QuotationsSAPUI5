@@ -30,7 +30,7 @@
             <Input id="idHeaderFormCutReference" value="{QuotedetailModel>/QUOTEHEADER/Bstkd}" change="onChangeCustomerName" />
 
             <Label class="sapUiTinyMarginTop sapUiLargeMarginBegin sapUiMediumMarginEnd" labelFor="idQuoteHeaderCustRefDate" text="Cust Reference Date" />
-            <DatePicker id="idQuoteHeaderCustRefDate" required="true" value="{path : 'QuotedetailModel>/QUOTEHEADER/Bstdk' , type : 'sap.ui.model.type.Date'}" change="onSetDate"></DatePicker>
+            <DatePicker id="idQuoteHeaderCustRefDate"  value="{path : 'QuotedetailModel>/QUOTEHEADER/Bstdk' , type : 'sap.ui.model.type.Date'}" change="onSetDate"></DatePicker>
         </HBox>
 
         <HBox>
@@ -38,7 +38,7 @@
             <DatePicker id="idQuoteHeaderValidFrom" class="sapUiMediumMarginBegin" width="75%" value="{path : 'QuotedetailModel>/QUOTEHEADER/Angdt' , type : 'sap.ui.model.type.Date'}" change="onSetDate"></DatePicker>
 
             <Label labelFor="idQuoteHeaderValidTo" text="Valid To" class="sapUiTinyMarginTop sapUiLargeMarginBegin sapUiMediumMarginEnd" />
-            <DatePicker id="idQuoteHeaderValidTo" required="true" class="sapUiLargeMarginBegin" width="80%" value="{path : 'QuotedetailModel>/QUOTEHEADER/Bnddt' , type : 'sap.ui.model.type.Date'}" change="onSetDate"></DatePicker>
+            <DatePicker id="idQuoteHeaderValidTo"  class="sapUiLargeMarginBegin" width="80%" value="{path : 'QuotedetailModel>/QUOTEHEADER/Bnddt' , type : 'sap.ui.model.type.Date'}" change="onSetDate"></DatePicker>
 
         </HBox>
         <HBox>

@@ -22,18 +22,18 @@
                                     <core:Item id="idQuoteTypeItem" key="{auart}" text="{bezei} ({auart})" />
                                 </ComboBox>
                                 <Label id="idLabelSalesorg" text="Sales Org" required="true"/>
-                                <Input id="idSalesOrg" liveChange="onChange" enabled="{this>/IsCreateQuoteSelected}" showValueHelp="true" valueHelpRequest="onSalesOrgVH" required="true">
+                                <Input id="idSalesOrg"  liveChange="onChange" enabled="{this>/IsCreateQuoteSelected}" showValueHelp="true" valueHelpRequest="onSalesOrgVH" required="true">
 
                                 </Input>
                                 <Label id="idLabelDC" text="Distribution Channel" required="true"></Label>
                                 <Input id="idDistrbutionChannel" liveChange="onChange" enabled="{this>/IsCreateQuoteSelected}" showValueHelp="true" valueHelpRequest="onDCVH" required="true"></Input>
                                 <Label id="idLabelDivision" text="Division" required="true"/>
-                                <Input id="idDivision" liveChange="onChange" enabled="{this>/IsCreateQuoteSelected}" showValueHelp="true" valueHelpRequest="onDivisionVH" required="true"></Input>
+                                <Input id="idDivision" value="" liveChange="onChange" enabled="{this>/IsCreateQuoteSelected}" showValueHelp="true" valueHelpRequest="onDivisionVH" required="true"></Input>
 
                                 <core:Title id="idTitleEdit" text="Edit/Display"/>
                                 <Label id="idLabelQuoteNumber" text="Quote Number" required="true"></Label>
-                                <Input id="idQuoteNumber" liveChange="onChange" enabled="{=! ${this>/IsCreateQuoteSelected}}" showValueHelp="true" valueHelpRequest="onQuoteIDVH" required="true"></Input>
-                            </f:content>
+                                <Input id="idQuoteNumber" value="" liveChange="onChange" enabled="{=! ${this>/IsCreateQuoteSelected}}" showValueHelp="true" valueHelpRequest="onQuoteIDVH" required="true"></Input>
+                            </f:content> 
                         </f:SimpleForm>
                         <FlexBox id="idFlexBoxGoButton" height="100px" alignItems="Center" justifyContent="Center">
                             <Button id="idQuoteSubmitButton" text="GO" press="onGOQuoteMain"></Button>

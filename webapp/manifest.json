@@ -15,9 +15,7 @@
         "uri": "/sap/opu/odata/sap/ZOTC_FIORI_QUOTE_SRV/",
         "type": "OData",
         "settings": {
-          "annotations": [
-            "localAnnotations"
-          ],
+          "annotations": ["localAnnotations"],
           "localUri": "localService/metadata.xml",
           "odataVersion": "2.0"
         }
@@ -26,9 +24,17 @@
         "type": "ODataAnnotation",
         "uri": "annotations/annotations.xml",
         "settings": {
-            "localUri": "annotations/annotations.xml"
+          "localUri": "annotations/annotations.xml"
         }
-    }
+      },
+      "freightService": {
+        "uri": "/sap/opu/odata/sap/ZOTC_FIORI_QUOT_FREIGHT_EST_SRV/",
+        "type": "OData",
+        "settings": {
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
     }
   },
   "sap.ui": {
@@ -77,9 +83,18 @@
         "dataSource": "mainService",
         "preload": true,
         "settings": {
-            "defaultOperationMode": "Server",
-            "defaultCountMode": "Inline",
-            "defaultBindingMode": "TwoWay"
+          "defaultOperationMode": "Server",
+          "defaultCountMode": "Inline",
+          "defaultBindingMode": "TwoWay"
+        }
+      },
+      "freight": {
+        "dataSource": "freightService",
+        "preload": true,
+        "settings": {
+          "defaultOperationMode": "Server",
+          "defaultCountMode": "Inline",
+          "defaultBindingMode": "TwoWay"
         }
       }
     },
@@ -104,17 +119,13 @@
         {
           "name": "RouteQuoteMain",
           "pattern": "",
-          "target": [
-            "TargetQuoteMain"
-          ]
+          "target": ["TargetQuoteMain"]
         },
         {
-            "name": "detail",
-            "pattern": "detail",
-            "target": [
-              "TargetQuoteDetail"
-            ]
-          }
+          "name": "detail",
+          "pattern": "detail",
+          "target": ["TargetQuoteDetail"]
+        }
       ],
       "targets": {
         "TargetQuoteMain": {
@@ -124,10 +135,10 @@
           "viewName": "view.QuoteMain"
         },
         "TargetQuoteDetail": {
-            "viewType": "XML",
-            "transition": "slide",
-            "viewId": "object.QuoteDetail",
-            "viewName": "object.QuoteDetail"
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "object.QuoteDetail",
+          "viewName": "object.QuoteDetail"
         }
       }
     },
