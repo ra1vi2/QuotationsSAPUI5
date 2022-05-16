@@ -6,8 +6,8 @@
             <m:OverflowToolbar>
                 <m:Title id="title" text="Order Item" level="H2"/>
                 <m:ToolbarSpacer/> 
-                <m:Button text="Add" press="onAddLineItem"/>
-                <m:Button text="Delete" press="onDeleteLineItem" />
+                <m:Button text="Add" press="onAddLineItem" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
+                <m:Button text="Delete" press="onDeleteLineItem" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }" />
             </m:OverflowToolbar>
         </extension>
         <columns>
@@ -20,7 +20,7 @@
             <Column width="12rem">
                 <m:Label text="Material" tooltip="Material"/>
                 <template>
-                    <m:Input value="{QuotedetailModel>Matnr}" showValueHelp="true" valueHelpRequest="onMaterialVH"></m:Input>
+                    <m:Input  value="{QuotedetailModel>Matnr}" showValueHelp="true" valueHelpRequest="onMaterialVH" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"></m:Input>
                 </template>
             </Column>
             <Column width="12rem" hAlign="Center">
@@ -38,7 +38,7 @@
             <Column width="6rem">
                 <m:Label text="Quantity" tooltip="Quantity"/>
                 <template>
-                    <m:Input value="{QuotedetailModel>Kwmeng}" submit="onSubmitItemQuantity"/>
+                    <m:Input value="{QuotedetailModel>Kwmeng}" submit="onSubmitItemQuantity" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                 </template>
             </Column>
             <Column width="3rem">
@@ -59,14 +59,26 @@
                     <m:Text text="{QuotedetailModel>ListPrice}" />
                 </template>
             </Column>
+            <Column width="3rem">
+                <m:Label text="Curr" tooltip="List Price Currency"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>ListpriceCurr}" />
+                </template>
+            </Column>
             <Column width="6rem">
                 <m:Label text="Calc Price" tooltip="Calculated Price"/>
                 <template>
                     <m:Text text="{QuotedetailModel>Kzwi2}" wrapping="false" />
                 </template>
             </Column>
+             <Column width="3rem">
+                <m:Label text="Curr" tooltip="Calculated Price Currency"/>
+                <template>
+                    <m:Text text="{QuotedetailModel>DocCurrency}" wrapping="false" />
+                </template>
+            </Column>
             <Column width="6rem">
-                <m:Label text="Disc." tooltip="Discount"/>
+                <m:Label text="Disc.%" tooltip="Discount %"/>
                 <template>
                     <m:Text text="{QuotedetailModel>Discount}" wrapping="false"/>
                 </template>
@@ -74,7 +86,7 @@
             <Column width="6rem">
                 <m:Label text="Override Sell Price" tooltip="Override Sell Price" />
                 <template>
-                    <m:Input value="{QuotedetailModel>OverrideSellprice}" submit="onEnterOverridePrice" />
+                    <m:Input value="{QuotedetailModel>OverrideSellprice}" submit="onEnterOverridePrice" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }" />
                 </template>
             </Column>
             <Column width="6rem">
@@ -86,25 +98,25 @@
             <Column width="9rem">
                 <m:Label text="Plant" tooltip="Plant"/>
                 <template>
-                    <m:Input value="{QuotedetailModel>ItemWerks}" showValueHelp="true" valueHelpRequest="onPlantVH"/>
+                    <m:Input value="{QuotedetailModel>ItemWerks}" showValueHelp="true" valueHelpRequest="onPlantVH" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                 </template>
             </Column>
             <Column width="9rem">
                 <m:Label text="Material Source" tooltip="Material Source"/>
                 <template>
-                    <m:Input showValueHelp="true" valueHelpRequest="onMaterialSourceVH" value="{QuotedetailModel>ItemZzmatSrc}"/>
+                    <m:Input showValueHelp="true" valueHelpRequest="onMaterialSourceVH" value="{QuotedetailModel>ItemZzmatSrc}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                 </template>
             </Column>
             <Column width="9rem">
                 <m:Label text="Item Cat." tooltip="Item Category"/>
                 <template>
-                    <m:Input value="{QuotedetailModel>Pstyv}"/>
+                    <m:Input value="{QuotedetailModel>Pstyv}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                 </template>
             </Column>
             <Column width="9rem">
                 <m:Label text="Reason for Rejection" tooltip="Reason for Rejection"/>
                 <template>
-                    <m:Input showValueHelp="true" valueHelpRequest="onRejctionReasonVH" value="{QuotedetailModel>Abgru}"/>
+                    <m:Input showValueHelp="true" valueHelpRequest="onRejctionReasonVH" selectedKey="{QuotedetailModel>Abgru}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                 </template>
             </Column>
              <Column width="6rem">
@@ -128,16 +140,16 @@
              <Column width="6rem" visible="false">
                 <m:Label text="Total Weight" tooltip="Total Weight"/>
                 <template>
-                    <m:Text text="{QuotedetailModel>Discount}" wrapping="false"/>
+                    <m:Text text="{QuotedetailModel>Btgew}" wrapping="false"/>
                 </template>
             </Column>
         </columns>
     </Table>
 
-    <m:OverflowToolbar id="otbFooter">
+    <!-- <m:OverflowToolbar id="otbFooter">
         <m:ToolbarSpacer/>
         <m:Button type="Accept" text="Create Quote" press="onSubmitQuote" />
-        <m:Button text="Cancel" press="onNavBack" />
+        <m:Button text="Cancel" press="onNavBack" /> 
 
-    </m:OverflowToolbar>
+    </m:OverflowToolbar> -->
 </core:FragmentDefinition>

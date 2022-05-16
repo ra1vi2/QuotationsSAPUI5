@@ -1,0 +1,13 @@
+{
+	"VIEW_MODES": {
+		"EDIT": "EDIT",
+		"DISPLAY": "DISPLAY"
+	},
+    "BUTTON_MODES":{
+         "CREATE" : "CREATE",
+         "EDIT" : "EDIT",
+         "DISPLAY" : "DISPLAY",
+         "CREATE_QUOTE" : "CREATE_QUOTE",
+         "CREATE_ORDER" : "CREATE_ORDER"
+    }
+}   

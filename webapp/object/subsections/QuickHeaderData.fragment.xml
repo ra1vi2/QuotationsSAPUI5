@@ -21,13 +21,13 @@
 			<form:FormContainer id="idQuickHeaderFormContainer">
                 <form:FormElement  label="Qt.Name">
 					<form:fields>
-	                   <Input value="{QuotedetailModel>QtName}" tooltip="{QuotedetailModel>QtName}" placeholder="Add Quote Name"/>
+	                   <Input value="{QuotedetailModel>QtName}" tooltip="{QuotedetailModel>QtName}" placeholder="Add Quote Name" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                        
 					</form:fields>
 				</form:FormElement>
 				<form:FormElement  label="Qt.Email">
 					<form:fields>
-	                   <Input value="{QuotedetailModel>QtEmail}" tooltip="{QuotedetailModel>QtEmail}" placeholder="Add Quote Email"/>
+	                   <Input id="idQuickHeaderEmail" value="{QuotedetailModel>QtEmail}" tooltip="{QuotedetailModel>QtEmail}" placeholder="Add Quote Email" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                        
 					</form:fields>
 				</form:FormElement>
@@ -48,7 +48,7 @@
                  <form:FormContainer> -->
                    <form:FormElement  label="Mat.Source">
 					<form:fields>
-	                   <Input id="idMaterialSource" selectedKey="{QuotedetailModel>HeaderZzmatSrc}"  showValueHelp="true" valueHelpRequest="onMaterialSourceVH"/>
+	                   <Input id="idMaterialSource" selectedKey="{QuotedetailModel>HeaderZzmatSrc}"  showValueHelp="true" valueHelpRequest="onMaterialSourceVH" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                     
 					</form:fields>
 				</form:FormElement>
@@ -56,13 +56,13 @@
                 <form:FormContainer id="idQuickHeaderFormContainer2">
                 <form:FormElement  label="Plant">
 					<form:fields>
-	                   <Input id="idQuickHeaderPlant" value="{QuotedetailModel>HeaderWerks}"  showValueHelp="true" valueHelpRequest="onPlantVH" />
+	                   <Input id="idQuickHeaderPlant" value="{QuotedetailModel>HeaderWerks}"  showValueHelp="true" valueHelpRequest="onPlantVH" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }" />
                     
 					</form:fields>
 				</form:FormElement>
                 <form:FormElement  label="Incoterms 1">
 					<form:fields>
-	                   <Input value="{QuotedetailModel>Inco1}" showValueHelp="true" valueHelpRequest="onIncoTerms1VH" />
+	                   <Input value="{QuotedetailModel>Inco1}" showValueHelp="true" valueHelpRequest="onIncoTerms1VH" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }" />
                        
                        
 					</form:fields>
@@ -70,7 +70,7 @@
                 <form:FormElement  label="Incoterms 2">
 					<form:fields>
 	                  
-                        <Input value="{QuotedetailModel>Inco2L}" tooltip="{QuotedetailModel>Inco2L}" />
+                        <Input value="{QuotedetailModel>Inco2L}" tooltip="{QuotedetailModel>Inco2L}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                        
 					</form:fields>
 				</form:FormElement>

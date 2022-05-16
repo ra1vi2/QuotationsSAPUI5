@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:m="sap.m">
+    <ValueHelpDialog id="idRejectionReasonVH" title="Rejection Reason" ok=".onRejectionReasonVHOkPress" cancel=".onValueHelpCancelPress" afterClose=".onValueHelpAfterClose" supportMultiselect="false" key="ABGRU" descriptionKey="BEZEI">
+        <filterBar>
+            <fb:FilterBar id="_IDGenFilterBar1" advancedMode="true" search=".onSearchRejectionReason">
+                <fb:filterGroupItems>
+
+                    <fb:FilterGroupItem id="_IDGenFilterGroupItem2" groupName="__$INTERNAL$" name="Vkorg" label="Sales Org" visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input id="_IDGenInput2" name="Vkorg" value="{RejectionReasonFilter>/VKORG}"/>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                    <fb:FilterGroupItem id="_IDGenFilterGroupItem12" groupName="__$INTERNAL$" name="AUART" label="Document type" visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input id="_IDGenInput12" name="AUART" value="{RejectionReasonFilter>/AUART}" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+        </filterBar>
+    </ValueHelpDialog>
+</core:FragmentDefinition>

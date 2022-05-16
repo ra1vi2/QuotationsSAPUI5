@@ -6,30 +6,50 @@
     <Shell id="shell">
         <App id="app">
             <pages>
-                <Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack" showHeader="false" >
+                <Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack" showHeader="false" showFooter="true">
                     <content >
 
                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteDetailHeader" type="XML"/>
                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteDetailHeaderMid" type="XML"/>
                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteDetailItem" type="XML"/>
+                        <Toolbar design="Solid" class="sapUiSmallMarginTop">
+                            <Panel backgroundDesign="Solid">
+                                <FlexBox alignItems="End" justifyContent="Center">
+                                    <Text text="Freight" />
+                                </FlexBox>
+                            </Panel>
+                        </Toolbar>
                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.Freight" type="XML"/>
-                         <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteFrieghtAction" type="XML"/>
+                        <core:Fragment fragmentName="com.quote.quotations.object.subsections.QuoteFrieghtAction" type="XML"/>
                     </content>
-                   <!-- <footer>
+                    <footer>
                         <OverflowToolbar id="otbFooter">
-                             <ToolbarSpacer/>
-                             <Button type="Accept" text="Create Quote" press="onSubmitQuote">
+                            <Button id="idButtonEdit" icon="sap-icon://edit" press="onPressEditQuoteDetail" visible="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/DISPLAY} }"/>
+                            <ToolbarSpacer/>
+                            <Button type="Accept" id="idButtonCreateQuote" text="Create Quote" press="onSubmitQuote" visible="{= ${this>/CurrButtonViewMode} === ${constants>/BUTTON_MODES/CREATE_QUOTE} }">
                                 <layoutData>
                                     <OverflowToolbarLayoutData priority="NeverOverflow"/>
                                 </layoutData>
                             </Button>
-                            <Button text="Cancel" press="onCancelQuote">
+                            <Button type="Accept" id="idButtonCreateOrder" text="Create Order (Background)" press="onCreateOrder" visible="{= ${this>/CurrButtonViewMode} === ${constants>/BUTTON_MODES/CREATE_ORDER} }">
                                 <layoutData>
                                     <OverflowToolbarLayoutData priority="NeverOverflow"/>
                                 </layoutData>
-                            </Button> 
+                            </Button>
+                            <Button type="Accept" id="idButtonCreateOrderFore" text="Create Order (Foreground)" press="onCreateOrderForeground" visible="{= ${this>/CurrButtonViewMode} === ${constants>/BUTTON_MODES/CREATE_ORDER} }">
+                                <layoutData>
+                                    <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                                </layoutData>
+                            </Button>
+                            <Button text="Cancel" press="onNavBack">
+                                <layoutData>
+                                    <OverflowToolbarLayoutData priority="NeverOverflow"/>
+                                </layoutData>
+                            </Button>
+                            <Button id="genrateEQuoteLinkbtn" text="Generate e-Quote Link" press="generateEQuoteLink" visible="{= ${this>/CurrButtonViewMode} === ${constants>/BUTTON_MODES/CREATE_ORDER} }"/>
+                            <Button id="emailEQuoteButton" press="emailQuote" text="Email e-Quote" visible="{= ${this>/CurrButtonViewMode} === ${constants>/BUTTON_MODES/CREATE_ORDER} }" />
                         </OverflowToolbar>
-                    </footer> -->
+                    </footer>
                 </Page>
             </pages>
         </App>

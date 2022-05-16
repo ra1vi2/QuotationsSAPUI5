@@ -96,6 +96,12 @@
           "defaultCountMode": "Inline",
           "defaultBindingMode": "TwoWay"
         }
+      },
+      "constants": {
+        "type": "sap.ui.model.json.JSONModel",
+        "settings": {},
+        "uri": "model/constants.json",
+        "preload": true
       }
     },
     "resources": {

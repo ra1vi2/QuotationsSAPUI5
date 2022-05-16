@@ -11,9 +11,10 @@
 		afterClose=".onValueHelpAfterClose"
 		supportMultiselect="false"
 		key="Matnr"
+        descriptionKey="Matnr"
 	>
     	<filterBar>
-			<fb:FilterBar id="_IDGenFilterBar1" advancedMode="true"  >
+			<fb:FilterBar id="_IDGenFilterBar1" advancedMode="true" search=".onSearchMaterialNumber"  >
 				<fb:filterGroupItems>
 					<fb:FilterGroupItem id="_IDGenFilterGroupItem1"
 						groupName="__$INTERNAL$"

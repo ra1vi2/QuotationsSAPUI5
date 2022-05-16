@@ -1,21 +1,38 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
-    xmlns:f="sap.ui.layout.form">
+    xmlns:f="sap.ui.layout.form"
+    xmlns:ui="sap.ui.table">
+
 
 
     <HBox class="sapUiMediumMarginTop">
-        <VBox>
-            <Button text="Generate Frieght Estimates" press="onGenerateFreightEstimate" />
-            <RadioButtonGroup id="idGenerateFreightEstimate">
+        <VBox >
+            <Button text="Generate Frieght Estimates" press="onGenerateFreightEstimate" class="sapUiSmallMarginBottom sapUiSmallMarginBegin" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
+            <!-- <RadioButtonGroup id="idGenerateFreightEstimate">
                 <RadioButton id="idGenerateFreightEstimateNone" text="None" />
                 <RadioButton id="idGenerateFreightEstimateGround" text="Ground" />
                 <RadioButton id="idGenerateFreightEstimate3Day" text="3rd Day Shipping" />
                 <RadioButton id="idGenerateFreightEstimate2Day" text="2nd Day" />
                 <RadioButton id="idGenerateFreightEstimateOvernight" text="Overnight" />
                 <RadioButton id="idGenerateFreightEstimateNextDay" text="Next Day Early AM" />
-            </RadioButtonGroup>
-
+            </RadioButtonGroup> -->
+            <ui:Table rows="{generatedFreight>/}" id="idTableFreightShipping" selectionMode="Single" visibleRowCount="7" width="25rem" rowSelectionChange="onSelectShippingType" >
+                <ui:columns>
+                    <ui:Column >
+                        <Label text="Shipping Method" tooltip="Shipping Method"/>
+                        <ui:template>
+                            <Text text="{generatedFreight>ServiceDescription}" />
+                        </ui:template>
+                    </ui:Column>
+                    <ui:Column >
+                        <Label text="Monetary Value" tooltip="Monetary Value"/>
+                        <ui:template>
+                            <Text text="{generatedFreight>MonetaryValue}" />
+                        </ui:template>
+                    </ui:Column>
+                </ui:columns>
+            </ui:Table>
         </VBox>
 
         <VBox>
@@ -23,42 +40,63 @@
                 <f:content>
                     <core:Title  />
                     <Label text="Freight Estimate Flag" />
-                    <Input id="name" value="{SupplierName}" />
+                    <Input id="name" value="{QuotedetailModel>/QUOTEHEADER/Kvgr3}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }" />
                     <Label text="Shipping Charge" />
-                    <Input value="{QuotedetailModel>/QUOTEHEADER/ShippingCharge}" />
+                    <Input id="idFreightShippingCharge" value="{QuotedetailModel>/QUOTEHEADER/ShippingCharge}" change="onChangeShippingCharge" submit="onChangeShippingCharge" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                     <Label text="Ship Complete" />
-                    <Input value="{QuotedetailModel>/QUOTEHEADER/Autlf}" />
+                    <!-- <Input value="{QuotedetailModel>/QUOTEHEADER/Autlf}" /> -->
+                    <CheckBox selected="{QuotedetailModel>/QUOTEHEADER/Autlf}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                     <Label text="Max Part del" />
-                    <Input value="{Street}" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/Antlf}" width="15%" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
+
+                    <Label text="Shipping Condition" />
+                    <!-- <Input id="idFreightShipCondition" value="{QuotedetailModel>/QUOTEHEADER/Vsbed}"/> -->
+                    <ComboBox id="idFreightShipCondition" selectedKey="{QuotedetailModel>/QUOTEHEADER/Vsbed}"
+                    items="{/ShippingConditionsSet}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }">
+                    <core:Item key="{Vsbed}" text="{Vtext} ({Vsbed})"></core:Item>
+                    </ComboBox>
+                    <Label text="Master Pack" />
+                    <Input id="idFrieghtMasterPack" value="{QuotedetailModel>/QUOTEHEADER/Kvgr2}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
 
                     <core:Title  />
                     <Label text="Shipping Instrctions" />
-                    <Input value="{QuotedetailModel>/QUOTEHEADER/ShippingInstr}" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/ShippingInstr}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                     <Label text="Parcel Acc Number" />
-                    <Input value="{QuotedetailModel>/QUOTEHEADER/ParcelAccno}" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/ParcelAccno}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }" />
 
                     <Label text="LTL Acc Number" />
-                    <Input value="{QuotedetailModel>/QUOTEHEADER/LtlAccno}" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/LtlAccno}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                     <Label text="Preferred Carrier" />
-                    <Input value="{Street}" />
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/PfCarrier}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
+
+                    <Label text="Blind Brand" />
+                    <!-- <Input id="idFreightBlindBrand" value="{QuotedetailModel>/QUOTEHEADER/Kvgr1}"/> -->
+                    <ComboBox id="idFreightBlindBrand" selectedKey="{QuotedetailModel>/QUOTEHEADER/Kvgr1}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"
+                    items="{/BlindBrandSet}">
+                    <core:Item key="{Kvgr1}" text="{Bezei} ({Kvgr1})"></core:Item></ComboBox>
+                    <Label text="Total Weight" class="sapUiSmallMarginEnd"/>
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/Btgew}" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
+                    <Input value="{QuotedetailModel>/QUOTEHEADER/Gewei}" width="50%" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
 
                 </f:content>
             </f:SimpleForm>
         </VBox>
 
 
-        <VBox class="sapUiLargeMarginTop">
+
+
+        <!-- <VBox class="sapUiLargeMarginTop">
             <HBox>
-                <Label text="Shipping Condition: " labelFor="idFreightShipCondition" class="sapUiSmallMarginEnd"/>
-                <Input id="idFreightShipCondition" value="{QuotedetailModel>/QUOTEHEADER/Kvgr2}"/>
+                <Label text="Shipping Condition: " labelFor="idFreightShipCondition" class="sapUiTinyMarginBegin sapUiSmallMarginEnd"/>
+                <Input id="idFreightShipCondition" value="{QuotedetailModel>/QUOTEHEADER/Vsbed}"/>
             </HBox>
             <HBox>
-                <Label text="Master Pack: " labelFor="idFrieghtMasterPack" class="sapUiLargeMarginEnd"/>
-                <Input id="idFrieghtMasterPack"/>
+                <Label text="Master Pack: " labelFor="idFrieghtMasterPack" class="sapUiSmallMarginBegin sapUiLargeMarginEnd"/>
+                <Input id="idFrieghtMasterPack" value="{QuotedetailModel>/QUOTEHEADER/Kvgr2}"/>
             </HBox>
             <HBox>
-                <Label text="Blind Brand: " labelFor="idFreightBlindBrand" class="sapUiLargeMarginEnd"/>
-                <Input id="idFreightBlindBrand"/>
+                <Label text="Blind Brand: " labelFor="idFreightBlindBrand" class="sapUiSmallMarginBegin sapUiLargeMarginEnd"/>
+                <Input id="idFreightBlindBrand" value="{QuotedetailModel>/QUOTEHEADER/Kvgr1}"/>
             </HBox>
 
 
@@ -69,7 +107,7 @@
                     <Input value="{QuotedetailModel>/QUOTEHEADER/Gewei}" width="50%"/>
                 </HBox>
             </VBox>
-        </VBox>
+        </VBox> -->
 
     </HBox>
 

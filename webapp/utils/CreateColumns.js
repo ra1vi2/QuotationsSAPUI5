@@ -213,6 +213,20 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
           ],
         });
       }
+      if(sRequestedVH === "RejectionReason"){
+          return new JSONModel({
+          cols: [
+            {
+              label: "Rejection Reason",
+              template: "ABGRU",
+            },
+            {
+              label: "Description",
+              template: "BEZEI",
+            },
+          ],
+        });
+      }
     },
   };
 });

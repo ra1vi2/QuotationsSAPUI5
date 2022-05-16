@@ -19,7 +19,7 @@ sap.ui.define(
         this.getView()
           .getModel("this")
           .setProperty("/IsCreateQuoteSelected", true);
-        this.getView().setModel(new JSONModel(), "QuoteIDFilterModel");
+        this.getView().setModel(new JSONModel({}), "QuoteIDFilterModel");
       },
 
       onSelectHeaderRadioButton: function (oEvent) {

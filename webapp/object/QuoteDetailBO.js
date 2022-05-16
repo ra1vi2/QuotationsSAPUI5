@@ -22,6 +22,12 @@ sap.ui.define(
       submitQuote: function (oView) {
         return this.submitData(oView.getModel(), this.preparePayload(oView));
       },
+      submitOrder: function (oView) {
+        return this.submitData(
+          oView.getModel(),
+          this.prepareOrderPayload(oView)
+        );
+      },
       onInputVH: function (
         oControl,
         ColModel,
@@ -183,7 +189,12 @@ sap.ui.define(
       },
       preparePayload: function (oView) {
         var aData = oView.getModel("QuotedetailModel").getData();
-        aData.action = "SAVE";
+        aData.action = "CREATEQUOTE";
+        return aData;
+      },
+      prepareOrderPayload: function (oView) {
+        var aData = oView.getModel("QuotedetailModel").getData();
+        aData.action = "CREATEORDER";
         return aData;
       },
       readItemTableLine: function (oView, object) {
@@ -214,6 +225,24 @@ sap.ui.define(
           CountryCode: aData.QUOTEHEADER.CountryCode,
           NetValue: aData.QUOTEHEADER.Netwr,
           InputItem: [],
+          UPSOutput: [
+            {
+              Identifier: aData.QUOTEHEADER.Username,
+              ServiceCode: "",
+              ServiceDescription: "",
+              MonetaryValue: "",
+              CurrencyCode: "",
+            },
+          ],
+          BLUJAYOutput: [
+            {
+              Identifier: aData.QUOTEHEADER.Username,
+              Carrier: "",
+              Service: "",
+              TotalFreight: "",
+              CurrencyCode: "",
+            },
+          ],
         };
 
         aData.QUOTEITEMS.results.forEach(function (item) {
@@ -262,6 +291,81 @@ sap.ui.define(
           TotalNetValue += parseFloat(item.Netvalue);
         });
         return TotalNetValue;
+      },
+      readQuote: function (oModel, sQuoteNumber) {
+        var sPath =
+          "/QuotationCreateSet(vbeln='" +
+          sQuoteNumber +
+          "',kunag='" +
+          "" +
+          "',kunwe='" +
+          "" +
+          "',auart='" +
+          "" +
+          "',vkorg='" +
+          "" +
+          "',vtweg='" +
+          "" +
+          "',spart='" +
+          "" +
+          "')";
+        return this.readData(oModel, sPath, {
+          urlParameters: {
+            $expand: "QUOTEHEADER,QUOTEITEMS,QUOTEPARTNERS",
+          },
+        });
+      },
+      getSalesDocForQuote: function (oView) {
+        return this.readData(
+          oView.getModel(),
+          "/CreateOrderForegroundSet(VBELN='" +
+            oView.getModel("QuotedetailModel").getData().QUOTEHEADER.Vbeln +
+            "')"
+        );
+      },
+      generateEQuoteLink: function (oView, aData) {
+        var aFilter = [];
+        aFilter.push(
+          new Filter("EquoteID", FilterOperator.EQ, aData.QUOTEHEADER.Vbeln)
+        );
+        aFilter.push(
+          new Filter("Email", FilterOperator.EQ, aData.QUOTEHEADER.QtEmail)
+        );
+        aFilter.push(
+          new Filter("SalesOrg", FilterOperator.EQ, aData.QUOTEHEADER.Vkorg)
+        );
+        aFilter.push(
+          new Filter(
+            "CountryCode",
+            FilterOperator.EQ,
+            aData.QUOTEHEADER.CountryCode
+          )
+        );
+        aFilter.push(new Filter("ChangeIndicator", FilterOperator.EQ, ""));
+        aFilter.push(new Filter("LastUpdated", FilterOperator.EQ, ""));
+        return this.readData(oView.getModel("freight"), "/GenerateEquoteSet", {
+          filters: aFilter,
+        });
+      },
+      emailEQuoteLink: function (oView, aData) {
+        var aFilter = [];
+        aFilter.push(new Filter("SalesOffice", FilterOperator.EQ, "ALL"));
+        aFilter.push(
+          new Filter("Email", FilterOperator.EQ, aData.QUOTEHEADER.QtEmail)
+        );
+        aFilter.push(
+          new Filter("SalesOrg", FilterOperator.EQ, aData.QUOTEHEADER.Vkorg)
+        );
+        aFilter.push(
+          new Filter("EquoteID", FilterOperator.EQ, aData.QUOTEHEADER.Vbeln)
+        );
+        aFilter.push(new Filter("Cancelled", FilterOperator.EQ, ""));
+        aFilter.push(
+          new Filter("Customer", FilterOperator.EQ, aData.QUOTEHEADER.Kunag)
+        );
+        return this.readData(oView.getModel("freight"), "/EmailEquoteSet", {
+          filters: aFilter,
+        });
       },
       submitData: function (oModel, aData) {
         return Utility.odataCreate(oModel, "/QuotationCreateSet", aData);

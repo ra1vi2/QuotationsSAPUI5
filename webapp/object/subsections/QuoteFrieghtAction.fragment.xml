@@ -1,54 +1,66 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
-    xmlns:f="sap.ui.layout.form">
+    xmlns:f="sap.ui.layout.form"
+    xmlns:html="http://www.w3.org/1999/xhtml">
 
-    <VBox>
+    <VBox class="sapUiSmallMarginTop">
+        <HBox class="sapUiLargeMarginBegin sapUiTinyMarginBottom">
+            
+        </HBox>
         <HBox>
-            <Label labelFor="idQuoteLink" text="Quotation Link" class="sapUiMediumMarginBegin" />
-            <TextArea id="idQuoteLink" value="" editable="false" class="sapUiSmallMarginBegin"/>
-
-            <Label labelFor="idSalesNotes" text="Sales Notes" class="sapUiMediumMarginBegin" />
-            <TextArea id="idSalesNotes" value="" editable="false" class="sapUiMediumMarginBegin" />
+            <Label labelFor="idQuoteLink" text="Quotation Link" class="sapUiMediumMarginBegin sapUiSmallMarginTop" />
+            <VBox>
+                <TextArea id="idQuoteLink" rows="3" cols="90" value="" editable="false" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+                <HBox class="sapUiTinyMarginBottom">
+                <Label labelFor="idLastUpdatedOn" text="Last Updated On:" class="sapUiTinyMarginTop" />
+                 <Text id="idLastUpdatedOn" text="06 May 2022" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiTinyMarginTop"/>
+                </HBox>
+            <!--  <HBox class="sapUiLargeMarginBegin sapUiTinyMarginBottom">   
+                <Button text="Generate e-Quote Link" class="margingeneratebtn" />
+                <Button text="Email e-Quote" class="sapUiSmallMarginBegin" />
+            </HBox> -->
+                <!--HBox>
+                    <Label labelFor="idLastUpdatedOn" text="Last Updated On:" class="sapUiTinyMarginTop" />
+                    <Text id="idLastUpdatedOn" text="06 May 2022" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiTinyMarginTop"/>
+                </HBox-->
+            </VBox>
+            <Label labelFor="idSalesNotes" text="Sales Notes" class="sapUiMediumMarginBegin sapUiSmallMarginTop" />
+            <TextArea id="idSalesNotes" value="" rows="3" cols="90" editable="false" class="sapUiSmallMarginBegin"/>
 
         </HBox>
-        <f:SimpleForm id="SimpleFormChange355" editable="true" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" class="sapUiLargeMarginBegin">
+        <f:SimpleForm id="SimpleFormChange355" editable="true" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" class="sapUiLargeMarginEnd">
             <f:content>
                 <core:Title  />
                 <Label text="Net Value" />
-                <Input value="{SupplierName}" />
+                <Input value="{QuotedetailModel>/QUOTEHEADER/Netwr}" width="70%" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                 <Label text="Est. Shipping" />
-                <Input value="" />
+                <Input value="{TotalValues>/totalShipping}" width="70%" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                 <Label text="Est. Tax" />
-                <Input value="" />
-                <Label text="Total" />
-                <Input value="" />
+                <Input value="{TotalValues>/totalTax}" width="70%" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
+
 
                 <core:Title  />
                 <Label text="Total Profit" />
-                <Input value="" />
+                <Input value="{TotalValues>/totalProfit}" width="70%" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
                 <Label text="Margin Profit" />
-                <Input value="" />
+                <Input value="" width="70%" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
+
+                <Toolbar height="0.5px" width="70%" class="zUiLargeMarginBegin" style="Standard" design="Solid"/>
+                <Label text="Total" />
+                <Input value="{TotalValues>/total}" width="70%" enabled="{= ${this>/CurrViewMode} === ${constants>/VIEW_MODES/EDIT} }"/>
+
             </f:content>
         </f:SimpleForm>
-
-        <f:SimpleForm id="SimpleFormChange356" editable="true" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" class="sapUiLargeMarginBegin">
+        <!-- 
+        <f:SimpleForm id="SimpleFormChange356" editable="true" layout="ResponsiveGridLayout" columnsXL="2" columnsL="2" columnsM="2" class="sapUiLargeMarginEnd">
             <f:content>
                 <core:Title  />
                 <Label text="" />
-                <Button text="Email Quote" />
+                
 
-                <Label text="" />
-                <Button text="Generate e-Quote Link" />
-
-
-                <core:Title  />
-                <Label text="" />
-                <Button text="Create Order(Background)" />
-                <Label text="" />
-                <Button text="Create Order(Foreground)" />
             </f:content>
-        </f:SimpleForm>
+        </f:SimpleForm> -->
 
     </VBox>
 </core:FragmentDefinition>
